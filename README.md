@@ -1,10 +1,21 @@
-# cs361_project
-Dominic's test commit.
+# Inventory Management
 
-Lifang's test commit 
+## High Level Design
 
-David (Min Xiao) Li's test commit
+![Architecture Diagram](./Design.png)
 
-Josh's test commit
+## Development
 
-Duane's test commit
+Front End:
+
+`npm run dev-fe`
+
+Back End:
+
+Make sure `mysql` is installed in your computer
+
+`npm run dev-be`
+
+## License
+
+UNLICENSED
