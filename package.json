@@ -12,6 +12,8 @@
     "postinstall": "npm run build"
   },
   "dependencies": {
+    "axios": "^0.19.2",
+    "bootstrap": "^4.5.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
@@ -25,6 +27,7 @@
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "react": "^16.13.1",
+    "react-bootstrap": "^1.1.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1"
