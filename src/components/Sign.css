@@ -1,0 +1,16 @@
+div {
+  text-align: center;
+}
+
+form {
+  display: table;
+  display: inline-block;
+}
+
+label {
+  display: table-cell;
+}
+
+input-field {
+  display: table-cell;
+}
