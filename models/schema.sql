@@ -4,8 +4,8 @@ DROP TABLE IF EXISTS UserLevels;
 CREATE TABLE UserLevels(
 	userLevelID INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     role VARCHAR(50) NOT NULL,
-    createdAt DATETIME  NOT NULL,
-    updatedAt DATETIME  NOT NULL,
+    createdAt DATETIME NOT NULL,
+    updatedAt DATETIME NOT NULL,
     UNIQUE (role)
 );
 
@@ -13,16 +13,19 @@ DROP TABLE IF EXISTS Users;
 CREATE TABLE Users(
 	userID INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     userLevelID INT NOT NULL,
-    name VARCHAR(50) NOT NULL,
-    password VARCHAR(255)  NOT NULL,
-    createdAt DATETIME  NOT NULL,
-    updatedAt DATETIME  NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    firstName VARCHAR(50) NOT NULL,
+    lastName VARCHAR(50) NOT NULL,
+    createdAt DATETIME NOT NULL,
+    updatedAt DATETIME NOT NULL,
     CONSTRAINT FOREIGN KEY (userLevelID) REFERENCES UserLevels(userLevelID)
 );
 
 DROP TABLE IF EXISTS Products;
 CREATE TABLE Products(
 	productID INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    code VARCHAR(10) NOT NULL,
     name VARCHAR(50) NOT NULL,
     descript VARCHAR(255),
     price DECIMAL(8, 2) NOT NULL,
