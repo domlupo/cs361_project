@@ -1,0 +1,37 @@
+{
+  "key": "userID",
+  "attributes": [
+    {
+      "feName": "User ID",
+      "dbName": "userID"
+    },
+    {
+      "feName": "Role",
+      "dbName": "userLevelID"
+    },
+    {
+      "feName": "Email",
+      "dbName": "email"
+    },
+    {
+      "feName": "Password",
+      "dbName": "password"
+    },
+    {
+      "feName": "First Name",
+      "dbName": "first name"
+    },
+    {
+      "feName": "Last Name",
+      "dbName": "last name"
+    },
+    {
+      "feName": "Date Created",
+      "dbName": "createdAt"
+    },
+    {
+      "feName": "Date Updated",
+      "dbName": "updatedAt"
+    }
+  ]
+}
