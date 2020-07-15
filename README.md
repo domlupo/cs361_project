@@ -6,6 +6,19 @@
 
 ## Development
 
+#### Setup:
+
+Add a `.env` file with the following keys:
+
+```
+DB_HOST=SAMPLE_DB_HOST
+DB_USERNAME=SAMPLE_DB_USERNAME
+DB_PASSWORD=SAMPLE_DB_PASSWORD
+DB_DATABASE=SAMPLE_DB_DATABASE
+
+JWT_SECRET=SAMPLE_JWT_SECRET
+```
+
 #### Front End:
 
 `npm run dev-fe`
