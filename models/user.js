@@ -1,17 +1,63 @@
+const moment = require('moment');
+const _ = require('lodash');
 const db = require('./db');
+const constants = require('../constants/constants');
 
+// remove password for getAll/getUserById to prevent password from being accessed
 const getAll = async () => {
-  return db.pool.asyncQuery('SELECT * FROM Users');
+  const data = await db.pool.asyncQuery('SELECT * FROM Users');
+  data.forEach((user) => {
+    // eslint-disable-next-line no-param-reassign
+    delete user.password;
+  });
+  return data;
 };
 
-const getUser = async (id) => {
-  return db.pool.asyncQuery('SELECT * FROM Users');
+const getUserById = async (id) => {
+  const data = await db.pool.asyncQuery(
+    'SELECT * FROM Users WHERE userID = ?',
+    [id],
+  );
+  const user = data[0];
+  if (!_.isEmpty(user)) {
+    delete user.password;
+  }
+  return user;
+};
+
+const getUserForAuthentication = async (email) => {
+  // ONLY use for authentication - password is present
+  const data = await db.pool.asyncQuery('SELECT * FROM Users WHERE email = ?', [
+    email,
+  ]);
+  return data[0];
 };
 
 const updateUser = (id, data) => {};
 
+const createUser = async (data) => {
+  const now = moment().format(constants.dateFormat);
+  await db.pool.asyncQuery(
+    'INSERT INTO Users (userLevelID, email, password, firstName, lastName, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?)',
+    [
+      data.userLevelID,
+      data.email,
+      data.password,
+      data.firstName,
+      data.lastName,
+      now,
+      now,
+    ],
+  );
+  return db.pool.asyncQuery('SELECT * FROM Users WHERE email = ?', [
+    data.email,
+  ]);
+};
+
 module.exports = {
   getAll,
-  getUser,
+  getUserById,
+  getUserForAuthentication,
   updateUser,
+  createUser,
 };

@@ -19,7 +19,8 @@ CREATE TABLE Users(
     lastName VARCHAR(50) NOT NULL,
     createdAt DATETIME NOT NULL,
     updatedAt DATETIME NOT NULL,
-    CONSTRAINT FOREIGN KEY (userLevelID) REFERENCES UserLevels(userLevelID)
+    CONSTRAINT FOREIGN KEY (userLevelID) REFERENCES UserLevels(userLevelID),
+    UNIQUE (email)
 );
 
 DROP TABLE IF EXISTS Products;
@@ -31,7 +32,8 @@ CREATE TABLE Products(
     price DECIMAL(8, 2) NOT NULL,
     expirable TINYINT NOT NULL DEFAULT 0,
     createdAt DATETIME NOT NULL,
-    updatedAt DATETIME NOT NULL
+    updatedAt DATETIME NOT NULL,
+    unique (code)
 );
 
 DROP TABLE IF EXISTS Transactions;
@@ -48,8 +50,5 @@ CREATE TABLE Transactions(
     CONSTRAINT FOREIGN KEY (userID) REFERENCES Users(userID),
     CONSTRAINT FOREIGN KEY (productID) REFERENCES Products(productID)
 );
-
-SET @@GLOBAL.auto_increment_increment = 10;
-SET @@SESSION.auto_increment_increment = 10;
 
 SET FOREIGN_KEY_CHECKS=1;
