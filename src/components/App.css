@@ -17,29 +17,20 @@
   background-color: #848d9e;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   font-size: calc(10px + 2vmin);
-  color: white;
 }
 
 .App-body {
   background-color: antiquewhite;
 }
 
-.nav-bar {
-  font-size: 20px;
+.management {
+  font-size: 28px;
 }
+
 .App-link {
   color: #61dafb;
   height: 500px;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }

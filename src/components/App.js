@@ -1,22 +1,32 @@
 import React from 'react';
+import {Link, BrowserRouter, Switch, Route } from 'react-router-dom';
+import {Navbar } from 'react-bootstrap';
+
 import './App.css';
-import {Navbar, Container } from 'react-bootstrap';
+import SignIn from './SignIn';
+import SignUp from './SignUp';
+import About from './About';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Different Time Zone</h1>
-        <Navbar expand="lg" variant="light" bg="light">
-          <Container className="nav-bar">
-            <Navbar.Brand href="#">Navbar</Navbar.Brand>
-          </Container>
-        </Navbar>
-      </header>
-      <body className="App-body">
-        <h3>Grocery Story </h3>
-      </body>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <header className="App-header">
+          <h1>Different Time Zone Inventory Management System</h1>
+          <Navbar>
+            <Link to="/about" style={{margin: '10px'}}>About</Link>
+            <Link to="/signin" style={{margin: '10px'}}>Sign In</Link>
+            <Link to="/signup" style={{margin: '10px'}}>Sign Up</Link>
+          </Navbar>
+        </header>
+        <Switch>
+          <Route path='/about' component={About} />
+          <Route path='/signin' component={SignIn} />
+          <Route path='/signup' component={SignUp} />
+        </Switch>
+      </div>
+    </BrowserRouter>
   );
 }
 
