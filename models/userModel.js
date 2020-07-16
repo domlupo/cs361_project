@@ -33,7 +33,14 @@ const getUserForAuthentication = async (email) => {
   return data[0];
 };
 
-const updateUser = (id, data) => {};
+const updateUser = async (id, data) => {
+  const now = moment().format(constants.dateFormat);
+  await db.pool.asyncQuery(
+    'UPDATE Users SET userLevelID = ?, firstName = ?, lastName = ?, updatedAt = ?',
+    [data.userLevelID, data.firstName, data.lastName, now],
+  );
+  return getUserById(id);
+};
 
 const createUser = async (data) => {
   const now = moment().format(constants.dateFormat);
@@ -49,9 +56,7 @@ const createUser = async (data) => {
       now,
     ],
   );
-  return db.pool.asyncQuery('SELECT * FROM Users WHERE email = ?', [
-    data.email,
-  ]);
+  return getUserForAuthentication(data.email);
 };
 
 module.exports = {

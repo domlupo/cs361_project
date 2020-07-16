@@ -5,9 +5,11 @@ const getAll = async () => {
 };
 
 const getUserLevelById = async (id) => {
-  return db.pool.asyncQuery('SELECT * FROM UserLevels WHERE userLevelID = ?', [
-    id,
-  ]);
+  const data = await db.pool.asyncQuery(
+    'SELECT * FROM UserLevels WHERE userLevelID = ?',
+    [id],
+  );
+  return data[0];
 };
 
 module.exports = {

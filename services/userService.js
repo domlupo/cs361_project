@@ -7,7 +7,7 @@ const getAll = async (req, res, next) => {
   let data;
   try {
     data = await userModel.getAll();
-    res.send(data);
+    res.status(200).send(data);
   } catch (e) {
     console.log(e);
     next(e);
@@ -18,7 +18,7 @@ const getUserById = async (req, res, next) => {
   let data;
   try {
     data = await userModel.getUserById(req.params.id);
-    res.send(data);
+    res.status(200).send(data);
   } catch (e) {
     console.log(e);
     next(e);
@@ -43,7 +43,8 @@ const create = async (req, res, next) => {
     lastName: yup.string().required(),
     userLevelID: yup
       .number()
-      .oneOf(userLevels.map((userLevel) => userLevel.userLevelID)),
+      .oneOf(userLevels.map((userLevel) => userLevel.userLevelID))
+      .required(),
   });
 
   schema
@@ -76,9 +77,55 @@ const login = async (req, res, next) => {
   });
 };
 
+const editUserLevel = async (req, res, next) => {
+  const userID = req.params.id;
+  const { userLevelID: newUserLevelID } = req.body;
+  const { user, userLevel } = res.locals;
+
+  const userLevels = await userLevelModel.getAll();
+  const schema = yup
+    .number()
+    .oneOf(userLevels.map((userLevelInner) => userLevelInner.userLevelID))
+    .required();
+
+  if (newUserLevelID < userLevel.userLevelID) {
+    res.status(403);
+    res.send({
+      message: 'Cannot promote to level above self',
+    });
+  }
+
+  schema
+    .validate(newUserLevelID)
+    .then(async (validatedUserLevelID) => {
+      const updatedUser = await userModel.updateUser(userID, {
+        ...user,
+        userLevelID: validatedUserLevelID,
+      });
+      res.status(200).send(updatedUser);
+    })
+    .catch((error) => {
+      res.status(400);
+      res.send(error);
+    });
+};
+
+const getAllLevels = async (req, res, next) => {
+  let data;
+  try {
+    data = await userLevelModel.getAll();
+    res.status(200).send(data);
+  } catch (e) {
+    console.log(e);
+    next(e);
+  }
+};
+
 module.exports = {
   getAll,
   getUserById,
   create,
   login,
+  editUserLevel,
+  getAllLevels,
 };
