@@ -4,7 +4,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const JWTStrategy = require('passport-jwt').Strategy;
 const ExtractJWT = require('passport-jwt').ExtractJwt;
 const _ = require('lodash');
-const userModel = require('../models/user');
+const userModel = require('../models/userModel');
 
 const BCRYPT_SALT_ROUNDS = 12;
 
