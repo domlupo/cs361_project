@@ -1,12 +1,12 @@
 const express = require('express');
 const userRouter = require('./userRouter');
+const productRouter = require('./productRouter');
+const transactionRouter = require('./transactionRouter');
 
 const router = express.Router();
 
-/* GET api index page. */
 router.use('/user', userRouter);
-router.get('/', (req, res, next) => {
-  res.send('hello world here');
-});
+router.use('/product', productRouter);
+router.use('/transaction', transactionRouter);
 
 module.exports = router;

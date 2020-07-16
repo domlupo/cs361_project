@@ -1,7 +1,7 @@
 const yup = require('yup');
 const jwt = require('jsonwebtoken');
-const userModel = require('../models/user');
-const userLevelModel = require('../models/userLevel');
+const userModel = require('../models/userModel');
+const userLevelModel = require('../models/userLevelModel');
 
 const getAll = async (req, res, next) => {
   let data;
@@ -14,7 +14,7 @@ const getAll = async (req, res, next) => {
   }
 };
 
-const getById = async (req, res, next) => {
+const getUserById = async (req, res, next) => {
   let data;
   try {
     data = await userModel.getUserById(req.params.id);
@@ -78,7 +78,7 @@ const login = async (req, res, next) => {
 
 module.exports = {
   getAll,
-  getById,
+  getUserById,
   create,
   login,
 };
