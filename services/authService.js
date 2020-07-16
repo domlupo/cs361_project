@@ -10,8 +10,7 @@ const login = (req, res, next) => {
       console.error(err);
     }
     if (info) {
-      res.status(403);
-      res.send(info.message);
+      res.status(403).send(info);
     } else {
       res.locals.user = user;
       next();
@@ -25,8 +24,7 @@ const create = (req, res, next) => {
       console.error(err);
     }
     if (info) {
-      res.status(400);
-      res.send(info.message);
+      res.status(400).send(info);
     } else {
       res.locals.passportUser = passportUser;
       next();
@@ -40,8 +38,7 @@ const jwt = (req, res, next) => {
       console.error(err);
     }
     if (info) {
-      res.status(403);
-      res.send(info.message);
+      res.status(403).send(info);
     } else {
       res.locals.user = user;
       next();

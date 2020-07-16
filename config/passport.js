@@ -49,7 +49,9 @@ passport.use(
       try {
         const user = await userModel.getUserForAuthentication(email);
         if (_.isEmpty(user)) {
-          return done(null, false, { message: 'User not found' });
+          return done(null, false, {
+            message: 'Email and password combination invalid',
+          });
         }
 
         // we delete the user password here so it doesn't get returned to the rest of the app

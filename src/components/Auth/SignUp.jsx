@@ -25,7 +25,7 @@ export default function SignUp() {
   return (
     <div className="SignIn">
       <form onSubmit={handleSubmit}>
-        <FormGroup controlId="firstName" bsSize="large">
+        <FormGroup controlId="firstName" bssize="large">
           <FormLabel>First Name</FormLabel>
           <FormControl
             autoFocus
@@ -34,7 +34,7 @@ export default function SignUp() {
             onChange={(e) => setFirstName(e.target.value)}
           />
         </FormGroup>
-        <FormGroup controlId="lastName" bsSize="large">
+        <FormGroup controlId="lastName" bssize="large">
           <FormLabel>Last Name</FormLabel>
           <FormControl
             type="lastName"
@@ -42,7 +42,7 @@ export default function SignUp() {
             onChange={(e) => setLastName(e.target.value)}
           />
         </FormGroup>
-        <FormGroup controlId="email" bsSize="large">
+        <FormGroup controlId="email" bssize="large">
           <FormLabel>Email</FormLabel>
           <FormControl
             type="email"
@@ -50,7 +50,7 @@ export default function SignUp() {
             onChange={(e) => setEmail(e.target.value)}
           />
         </FormGroup>
-        <FormGroup controlId="password" bsSize="large">
+        <FormGroup controlId="password" bssize="large">
           <FormLabel>Password</FormLabel>
           <FormControl
             type="password"

@@ -1,5 +1,5 @@
 import React, { Component, useReducer } from 'react';
-import axios from 'axios'; // library for AJAX functions
+import API from '../../apis/API'; // library for AJAX functions
 import Table from '../shared/Table';
 
 // This component is a class because it has state. Having state is neccesary
@@ -28,13 +28,16 @@ class UsersIndex extends Component {
 
   getUsers() {
     // AJAX call to /api/user
-    axios.get('/api/user').then((res) => {
-      // update state based on return JSON from backend
-      // React will automatically rerender the component after state updates.
-      // Always use setState to update state. Updating state directly
-      // can cause errors.
-      this.setState({ index: res.data });
-    });
+    API.instance
+      .get('/user')
+      .then((res) => {
+        // update state based on return JSON from backend
+        // React will automatically rerender the component after state updates.
+        // Always use setState to update state. Updating state directly
+        // can cause errors.
+        this.setState({ index: res.data });
+      })
+      .catch((error) => console.log(error.response));
   }
 
   // This render function is called when component first renders
