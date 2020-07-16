@@ -1,4 +1,5 @@
 const passport = require('passport');
+const userLevelModel = require('../models/userLevelModel');
 
 // authentication middleware:
 //  - we exit early in failed cases
@@ -46,8 +47,27 @@ const jwt = (req, res, next) => {
   })(req, res, next);
 };
 
+const managementOnly = async (req, res, next) => {
+  const { user } = res.locals;
+  if (!user) {
+    res.status(403);
+    res.send({ message: 'Unauthorized' });
+  } else {
+    const userLevel = await userLevelModel.getUserLevelById(user.userLevelID);
+
+    if (userLevel.role !== 'owner' && userLevel.role !== 'manager') {
+      res.status(403);
+      res.send({ message: 'Unauthorized' });
+    } else {
+      res.locals.userLevel = userLevel;
+      next();
+    }
+  }
+};
+
 module.exports = {
   create,
   login,
   jwt,
+  managementOnly,
 };

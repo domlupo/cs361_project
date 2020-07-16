@@ -90,9 +90,8 @@ passport.use(
     },
     async (JWTPayload, done) => {
       // passport-jwt expects simple done() call without return
-      console.log(JWTPayload);
       try {
-        const user = userModel.getUserForAuthentication(JWTPayload.email);
+        const user = await userModel.getUserForAuthentication(JWTPayload.id);
         delete user.password;
         if (_.isEmpty(user)) {
           done(null, false);
