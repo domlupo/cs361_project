@@ -7,14 +7,9 @@ export default function TableRow(props) {
 
   return (
     <tr>
-      <td className={rowClasses}>{row.userID}</td>
-      <td className={rowClasses}>{row.userLevelID}</td>
-      <td className={rowClasses}>{row.email}</td>
-      <td className={rowClasses}>{row.password}</td>
-      <td className={rowClasses}>{row.firstName}</td>
-      <td className={rowClasses}>{row.lastName}</td>
-      <td className={rowClasses}>{row.createdAt}</td>
-      <td className={rowClasses}>{row.updatedAt}</td>
+      {Object.entries(row).map(([key, value]) => {
+        return <td className={rowClasses}>{value}</td>;
+      })}
     </tr>
   );
 }
