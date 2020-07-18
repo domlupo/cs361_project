@@ -14,7 +14,8 @@
     "no-param-reassign": "warn",
     "no-use-before-define": "warn",
     "import/prefer-default-export": "warn",
-    "consistent-return": "off"
+    "consistent-return": "off",
+    "react/prop-types": 1
   },
   "env": {
     "browser": true,

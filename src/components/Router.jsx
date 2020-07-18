@@ -5,6 +5,7 @@ import About from './About/About';
 import SignIn from './Auth/SignIn';
 import SignUp from './Auth/SignUp';
 import UsersIndex from './Users/UsersIndex';
+import UsersUpdate from './Users/UsersUpdate';
 
 export default function Router() {
   return (
@@ -32,6 +33,7 @@ export default function Router() {
           <Route path="/signin" component={SignIn} />
           <Route path="/signup" component={SignUp} />
           <Route path="/user-index" component={UsersIndex} />
+          <Route path="/user-edit" component={UsersUpdate} />
         </Switch>
       </div>
     </BrowserRouter>
