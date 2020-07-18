@@ -1,6 +1,7 @@
 import React, { Component, useReducer } from 'react';
 import API from '../../apis/API'; // library for AJAX functions
 import Table from '../shared/Table';
+import Search from '../SearchSection/Search';
 
 // This component is a class because it has state. Having state is neccesary
 // because the page will render before the AJAX is complete. Once the AJAX
@@ -57,6 +58,9 @@ class UsersIndex extends Component {
     return (
       <div className="container-fluid text-center">
         <Table headers={tableHeaders} rows={index} />
+
+        <br />
+        <Search />
       </div>
     );
   }
