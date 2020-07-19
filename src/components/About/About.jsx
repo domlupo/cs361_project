@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import UserManagement from '../Users/UserManagement';
 
 // test
 
@@ -16,6 +15,7 @@ function About() {
           padding: '20px',
           margin: '20px',
         }}
+        href="/user-index"
         block
       >
         UserManagement

@@ -1,7 +1,7 @@
 import React, { Component, useReducer } from 'react';
 import API from '../../apis/API'; // library for AJAX functions
 import Table from '../shared/Table';
-import Search from '../SearchSection/Search';
+import ProductSearch from '../SearchSection/ProductSearch';
 
 // This component is a class because it has state. Having state is neccesary
 // because the page will render before the AJAX is complete. Once the AJAX
@@ -9,7 +9,7 @@ import Search from '../SearchSection/Search';
 // rerender the component with the new state. An additional reason this
 // componenet has state is because if AJAX fails, no results will be available
 // to render
-class UsersIndex extends Component {
+class ProductList extends Component {
   constructor(props) {
     super(props);
 
@@ -30,7 +30,7 @@ class UsersIndex extends Component {
   getUsers() {
     // AJAX call to /api/user
     API.instance
-      .get('/user')
+      .get('/product')
       .then((res) => {
         // update state based on return JSON from backend
         // React will automatically rerender the component after state updates.
@@ -59,11 +59,11 @@ class UsersIndex extends Component {
       <div className="container-fluid text-center">
         <Table headers={tableHeaders} rows={index} />
 
+        <ProductSearch />
         <br />
-        <Search />
       </div>
     );
   }
 }
 
-export default UsersIndex;
+export default ProductList;
