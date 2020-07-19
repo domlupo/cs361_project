@@ -9,8 +9,9 @@ import TableRow from './TableRow';
 export default function Table(props) {
   // set "headers" and "rows" from props
   // these props may be passed from any parent component e.g. UserIndex.js
-  const { headers } = props;
-  const { rows } = props;
+  const { headers, rows, select, selected, handleSelect } = props;
+
+  const selectSpace = select ? <th /> : null;
 
   return (
     <div className="row justify-content-center">
@@ -18,6 +19,7 @@ export default function Table(props) {
         <table className="table-responsive p-1">
           <thead>
             <tr>
+              {selectSpace}
               {headers.map((header) => {
                 return (
                   <th className="border border-dark p-1 align-middle">
@@ -30,7 +32,14 @@ export default function Table(props) {
 
           <tbody>
             {rows.map((row) => {
-              return <TableRow row={row} />;
+              return (
+                <TableRow
+                  row={row}
+                  select={select}
+                  selected={selected}
+                  handleSelect={handleSelect}
+                />
+              );
             })}
           </tbody>
         </table>
