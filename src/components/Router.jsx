@@ -5,6 +5,7 @@ import About from './About/About';
 import SignIn from './Auth/SignIn';
 import SignUp from './Auth/SignUp';
 import UsersIndex from './Users/UsersIndex';
+import Product from './Product/ProductList';
 
 export default function Router() {
   return (
@@ -25,6 +26,9 @@ export default function Router() {
             <Link to="/user-index" style={{ margin: '10px' }}>
               User Index
             </Link>
+            <Link to="/product" style={{ margin: '10px' }}>
+              Product
+            </Link>
           </Navbar>
         </header>
         <Switch>
@@ -32,6 +36,7 @@ export default function Router() {
           <Route path="/signin" component={SignIn} />
           <Route path="/signup" component={SignUp} />
           <Route path="/user-index" component={UsersIndex} />
+          <Route path="/product" component={Product} />
         </Switch>
       </div>
     </BrowserRouter>
