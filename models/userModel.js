@@ -36,8 +36,8 @@ const getUserForAuthentication = async (email) => {
 const updateUser = async (id, data) => {
   const now = moment().format(constants.dateFormat);
   await db.pool.asyncQuery(
-    'UPDATE Users SET userLevelID = ?, firstName = ?, lastName = ?, updatedAt = ?',
-    [data.userLevelID, data.firstName, data.lastName, now],
+    'UPDATE Users SET userLevelID = ?, firstName = ?, lastName = ?, updatedAt = ? WHERE Users.userID = ?',
+    [data.userLevelID, data.firstName, data.lastName, now, id],
   );
   return getUserById(id);
 };
