@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
 import { useSelector } from 'react-redux';
-import Router from './Router';
+import AppRoutes from './AppRoutes';
 import API from '../apis/API';
+import AuthRouter from './AuthRouter';
 
 // initialize our application here
-const Main = () => {
+const App = () => {
   const [loaded, setLoaded] = useState(false);
   const token = useSelector((state) => state.token);
 
@@ -21,7 +22,7 @@ const Main = () => {
     return null;
   }
 
-  return <Router />;
+  return <AuthRouter />;
 };
 
-export default Main;
+export default App;
