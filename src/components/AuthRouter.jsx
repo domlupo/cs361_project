@@ -8,6 +8,7 @@ import AppRoutes from './AppRoutes';
 
 export default function AuthRouter() {
   const authenticated = useSelector((state) => state.authenticated);
+
   return (
     <BrowserRouter>
       <Switch>
