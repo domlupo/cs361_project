@@ -42,7 +42,7 @@ export default function Navigation({ children }) {
         </NavLink>
         <NavLink
           className="NavigationLink"
-          to="/signup"
+          to="/user-insert"
           activeClassName="NavigationLinkActive"
         >
           Add New User

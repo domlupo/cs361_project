@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
 import API from '../../apis/API'; // library for AJAX functions
 import Table from '../shared/Table';
-import Search from '../SearchSection/Search';
+import Header, { HeaderPadding } from '../Navigation/Header';
 
 // This component is a class because it has state. Having state is neccesary
 // because the page will render before the AJAX is complete. Once the AJAX
@@ -72,17 +72,21 @@ class UsersIndex extends Component {
     // and we set the data within headers to "tableHeaders" which is
     // is set within the render() function.
     return (
-      <div className="container-fluid text-center">
-        <Table
-          headers={tableHeaders}
-          rows={index}
-          select
-          selected={selected}
-          handleSelect={this.handleSelect}
-        />
+      <div>
+        <Header />
+        <HeaderPadding />
+        <div className="container-fluid text-center">
+          <Table
+            headers={tableHeaders}
+            rows={index}
+            select
+            selected={selected}
+            handleSelect={this.handleSelect}
+          />
 
-        <br />
-        <Button onClick={this.handleEdit}>Edit</Button>
+          <br />
+          <Button onClick={this.handleEdit}>Edit</Button>
+        </div>
       </div>
     );
   }
