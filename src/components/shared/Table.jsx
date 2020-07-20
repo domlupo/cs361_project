@@ -31,6 +31,8 @@ export default function Table(props) {
         return 'Date Updated';
       case 'productID':
         return 'Product ID';
+      case 'name':
+        return 'Name';
       case 'code':
         return 'Code';
       case 'descript':
@@ -40,7 +42,7 @@ export default function Table(props) {
       case 'expirable':
         return 'Expirable';
       default:
-        return 'Failure';
+        return '';
     }
   });
 

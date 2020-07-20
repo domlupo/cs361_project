@@ -13,8 +13,6 @@ class UsersUpdate extends Component {
 
     this.state = {
       userRole: '',
-      firstName: '',
-      lastName: '',
       successMessage: '',
       errorMessage: '',
     };
@@ -75,10 +73,11 @@ class UsersUpdate extends Component {
       return;
     }
 
+    const userID = this.getUserID();
     const userLevelID = getIDfromRole(userRole);
 
     API.instance
-      .put(`/user/${userLevelID}/level`, { userLevelID, firstName, lastName })
+      .put(`/user/${userID}/level`, { userLevelID, firstName, lastName })
       .then(() => {
         this.setState({
           errorMessage: null,
@@ -97,13 +96,7 @@ class UsersUpdate extends Component {
   }
 
   render() {
-    const {
-      userRole,
-      firstName,
-      lastName,
-      successMessage,
-      errorMessage,
-    } = this.state;
+    const { userRole, successMessage, errorMessage } = this.state;
 
     return (
       <Container>
@@ -116,20 +109,6 @@ class UsersUpdate extends Component {
               onChange={this.handleChange}
               name="userRole"
               value={userRole}
-            />
-            <Form.Label>First Name</Form.Label>
-            <Form.Control
-              type="text"
-              onChange={this.handleChange}
-              name="firstName"
-              value={firstName}
-            />
-            <Form.Label>Last Name</Form.Label>
-            <Form.Control
-              type="text"
-              onChange={this.handleChange}
-              name="lastName"
-              value={lastName}
             />
             <Button onClick={this.handleSubmit}>Submit</Button>
             {successMessage && <p className="text-success">{successMessage}</p>}

@@ -83,7 +83,6 @@ class UsersIndex extends Component {
 
         <br />
         <Button onClick={this.handleEdit}>Edit</Button>
-        <Search />
       </div>
     );
   }
