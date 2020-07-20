@@ -1,0 +1,88 @@
+.MainNavigation {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  background-color: var(--color-light);
+}
+
+.NavigationBar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 72px;
+  background-color: var(--color-white);
+}
+
+.NavigationSide {
+  height: 100vh;
+  width: 25%;
+  max-width: 300px;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-dark);
+  z-index: 50000;
+  top: 0;
+}
+
+.NavigationSideContainer {
+  width: 25%;
+  max-width: 300px;
+}
+
+.NavigationHeader {
+  color: var(--color-text-light);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.NavigationHeader:hover {
+  color: var(--color-text-light-hover);
+  text-decoration: none;
+}
+
+.NavigationTitle {
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 0;
+  margin-left: 10px;
+  text-align: center;
+}
+
+.NavigationLink {
+  padding: 20px;
+  color: var(--color-text-medium);
+  font-weight: bold;
+}
+
+.NavigationLinkActive {
+  color: var(--color-text-medium-hover);
+  background-color: var(--color-dark-hover);
+}
+
+.NavigationLink:hover {
+  color: var(--color-text-medium-hover);
+  background-color: var(--color-dark-hover);
+  text-decoration: none;
+}
+
+.NavigationUser {
+  border-left: 1px var(--color-light) solid;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.NavigationUserText {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  align-items: flex-start;
+}

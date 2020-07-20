@@ -2,6 +2,7 @@ import React, { Component, useReducer } from 'react';
 import API from '../../apis/API'; // library for AJAX functions
 import Table from '../shared/Table';
 import ProductSearch from '../SearchSection/ProductSearch';
+import Header, { HeaderPadding } from '../Navigation/Header';
 
 // This component is a class because it has state. Having state is neccesary
 // because the page will render before the AJAX is complete. Once the AJAX
@@ -57,9 +58,12 @@ class ProductList extends Component {
     // is set within the render() function.
     return (
       <div className="container-fluid text-center">
+        <Header>
+          <ProductSearch />
+        </Header>
+        <HeaderPadding />
         <Table headers={tableHeaders} rows={index} />
 
-        <ProductSearch />
         <br />
       </div>
     );
