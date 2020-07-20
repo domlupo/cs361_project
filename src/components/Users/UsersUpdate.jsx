@@ -6,6 +6,7 @@ import {
   getIDfromRole,
   validRole,
 } from '../shared/userRoleHelpers';
+import Header, { HeaderPadding } from '../Navigation/Header';
 
 class UsersUpdate extends Component {
   constructor(props) {
@@ -99,24 +100,30 @@ class UsersUpdate extends Component {
     const { userRole, successMessage, errorMessage } = this.state;
 
     return (
-      <Container>
-        <Row>
-          <Col />
-          <Col>
-            <Form.Label>Role</Form.Label>
-            <Form.Control
-              type="text"
-              onChange={this.handleChange}
-              name="userRole"
-              value={userRole}
-            />
-            <Button onClick={this.handleSubmit}>Submit</Button>
-            {successMessage && <p className="text-success">{successMessage}</p>}
-            {errorMessage && <p className="text-danger">{errorMessage}</p>}
-          </Col>
-          <Col />
-        </Row>
-      </Container>
+      <div>
+        <Header />
+        <HeaderPadding />
+        <Container>
+          <Row>
+            <Col />
+            <Col>
+              <Form.Label>Role</Form.Label>
+              <Form.Control
+                type="text"
+                onChange={this.handleChange}
+                name="userRole"
+                value={userRole}
+              />
+              <Button onClick={this.handleSubmit}>Submit</Button>
+              {successMessage && (
+                <p className="text-success">{successMessage}</p>
+              )}
+              {errorMessage && <p className="text-danger">{errorMessage}</p>}
+            </Col>
+            <Col />
+          </Row>
+        </Container>
+      </div>
     );
   }
 }
