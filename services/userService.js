@@ -80,7 +80,8 @@ const login = async (req, res, next) => {
 const editUserLevel = async (req, res, next) => {
   const userID = req.params.id;
   const { userLevelID: newUserLevelID } = req.body;
-  const { user, userLevel } = res.locals;
+  const { userLevel } = res.locals;
+  const user = await userModel.getUserById(userID);
 
   const userLevels = await userLevelModel.getAll();
   const schema = yup
