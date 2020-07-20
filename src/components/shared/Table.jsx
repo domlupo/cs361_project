@@ -11,6 +11,39 @@ export default function Table(props) {
   // these props may be passed from any parent component e.g. UserIndex.js
   const { headers, rows, select, selected, handleSelect } = props;
 
+  const formattedHeaders = headers.map((header) => {
+    switch (header) {
+      case 'userID':
+        return 'User ID';
+      case 'userLevelID':
+        return 'Role';
+      case 'email':
+        return 'Email';
+      case 'password':
+        return 'Password';
+      case 'firstName':
+        return 'First Name';
+      case 'lastName':
+        return 'Last Name';
+      case 'createdAt':
+        return 'Date Created';
+      case 'updatedAt':
+        return 'Date Updated';
+      case 'productID':
+        return 'Product ID';
+      case 'code':
+        return 'Code';
+      case 'descript':
+        return 'Description';
+      case 'price':
+        return 'Price';
+      case 'expirable':
+        return 'Expirable';
+      default:
+        return 'Failure';
+    }
+  });
+
   const selectSpace = select ? <th /> : null;
 
   return (
@@ -20,10 +53,10 @@ export default function Table(props) {
           <thead>
             <tr>
               {selectSpace}
-              {headers.map((header) => {
+              {formattedHeaders.map((formattedHeader) => {
                 return (
                   <th className="border border-dark p-1 align-middle">
-                    {header}
+                    {formattedHeader}
                   </th>
                 );
               })}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
+import { getRoleFromID } from './userRoleHelpers';
 
 class TableRow extends Component {
   constructor(props) {
@@ -20,6 +21,7 @@ class TableRow extends Component {
 
     let selectButton = null;
 
+    // Highlight most recently selected row
     if (select) {
       if (selected === row.userID) {
         selectButton = (
@@ -48,12 +50,23 @@ class TableRow extends Component {
       }
     }
 
+    // format row values
+    const formattedRows = Object.entries(row).map(([key, value]) => {
+      if (key === 'createdAt' || key === 'updatedAt') {
+        return value.slice(0, 10);
+      }
+      if (key === 'userLevelID') {
+        return getRoleFromID(value);
+      }
+      return value;
+    });
+
     return (
       <tr>
         {selectButton}
 
-        {Object.entries(row).map(([key, value]) => {
-          return <td className={rowClasses}>{value}</td>;
+        {formattedRows.map((formattedRow) => {
+          return <td className={rowClasses}>{formattedRow}</td>;
         })}
       </tr>
     );
