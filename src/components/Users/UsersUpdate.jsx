@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import API from '../../apis/API';
+import {
+  getRoleFromID,
+  getIDfromRole,
+  validRole,
+} from '../shared/userRoleHelpers';
 
 class UsersUpdate extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      userLevelID: '',
+      userRole: '',
       firstName: '',
       lastName: '',
       successMessage: '',
@@ -26,7 +31,8 @@ class UsersUpdate extends Component {
 
   getUserID() {
     const { location } = this.props;
-    const userID = location.pathname.slice(11);
+    const userID = location.pathname.slice(13);
+
     return userID;
   }
 
@@ -38,7 +44,7 @@ class UsersUpdate extends Component {
         .get(`/user/${userID}`)
         .then((res) => {
           this.setState({
-            userLevelID: res.data.userLevelID,
+            userRole: getRoleFromID(res.data.userLevelID),
             firstName: res.data.firstName,
             lastName: res.data.lastName,
           });
@@ -57,34 +63,42 @@ class UsersUpdate extends Component {
   }
 
   handleSubmit(e) {
-    const { userLevelID, firstName, lastName } = this.state;
+    const { userRole, firstName, lastName } = this.state;
 
-    const userID = this.getUserID();
+    // check if valid role inputted
+    if (!validRole(userRole)) {
+      this.setState({
+        successMessage: null,
+        errorMessage: 'Please input a valid role',
+      });
 
-    if (userID !== null) {
-      API.instance
-        .put(`/user/${userID}/level`, { userLevelID, firstName, lastName })
-        .then(() => {
-          this.setState({
-            errorMessage: null,
-            successMessage: 'Success',
-          });
-        })
-        .catch((error) => {
-          this.setState({
-            successMessage: null,
-            errorMessage:
-              error.response?.data?.message || 'An unexpected error occurred',
-          });
-        });
+      return;
     }
+
+    const userLevelID = getIDfromRole(userRole);
+
+    API.instance
+      .put(`/user/${userLevelID}/level`, { userLevelID, firstName, lastName })
+      .then(() => {
+        this.setState({
+          errorMessage: null,
+          successMessage: 'Success',
+        });
+      })
+      .catch((error) => {
+        this.setState({
+          successMessage: null,
+          errorMessage:
+            error.response?.data?.message || 'An unexpected error occurred',
+        });
+      });
 
     e.preventDefault();
   }
 
   render() {
     const {
-      userLevelID,
+      userRole,
       firstName,
       lastName,
       successMessage,
@@ -100,8 +114,8 @@ class UsersUpdate extends Component {
             <Form.Control
               type="text"
               onChange={this.handleChange}
-              name="userLevelID"
-              value={userLevelID}
+              name="userRole"
+              value={userRole}
             />
             <Form.Label>First Name</Form.Label>
             <Form.Control

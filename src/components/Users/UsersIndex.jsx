@@ -53,7 +53,7 @@ class UsersIndex extends Component {
     const { history } = this.props;
     const { selected } = this.state;
 
-    history.push(`/user-edit/${selected}`);
+    history.push(`/user-update/${selected}`);
   }
 
   // This render function is called when component first renders
@@ -73,9 +73,16 @@ class UsersIndex extends Component {
     // is set within the render() function.
     return (
       <div className="container-fluid text-center">
-        <Table headers={tableHeaders} rows={index} />
+        <Table
+          headers={tableHeaders}
+          rows={index}
+          select
+          selected={selected}
+          handleSelect={this.handleSelect}
+        />
 
         <br />
+        <Button onClick={this.handleEdit}>Edit</Button>
         <Search />
       </div>
     );
