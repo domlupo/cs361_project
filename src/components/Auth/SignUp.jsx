@@ -24,7 +24,7 @@ export default function SignUp() {
 
   return (
     <div className="SignIn">
-      <form onSubmit={handleSubmit}>
+      <form className="SignInForm" onSubmit={handleSubmit}>
         <FormGroup controlId="firstName" bssize="large">
           <FormLabel>First Name</FormLabel>
           <FormControl
@@ -58,7 +58,9 @@ export default function SignUp() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </FormGroup>
-        <Button type="submit">Sign Up</Button>
+        <Button style={{ width: '100%' }} type="submit">
+          Sign Up
+        </Button>
       </form>
     </div>
   );

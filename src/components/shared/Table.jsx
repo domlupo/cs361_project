@@ -9,8 +9,44 @@ import TableRow from './TableRow';
 export default function Table(props) {
   // set "headers" and "rows" from props
   // these props may be passed from any parent component e.g. UserIndex.js
-  const { headers } = props;
-  const { rows } = props;
+  const { headers, rows, select, selected, handleSelect } = props;
+
+  const formattedHeaders = headers.map((header) => {
+    switch (header) {
+      case 'userID':
+        return 'User ID';
+      case 'userLevelID':
+        return 'Role';
+      case 'email':
+        return 'Email';
+      case 'password':
+        return 'Password';
+      case 'firstName':
+        return 'First Name';
+      case 'lastName':
+        return 'Last Name';
+      case 'createdAt':
+        return 'Date Created';
+      case 'updatedAt':
+        return 'Date Updated';
+      case 'productID':
+        return 'Product ID';
+      case 'name':
+        return 'Name';
+      case 'code':
+        return 'Code';
+      case 'descript':
+        return 'Description';
+      case 'price':
+        return 'Price';
+      case 'expirable':
+        return 'Expirable';
+      default:
+        return '';
+    }
+  });
+
+  const selectSpace = select ? <th /> : null;
 
   return (
     <div className="row justify-content-center">
@@ -18,10 +54,11 @@ export default function Table(props) {
         <table className="table-responsive p-1">
           <thead>
             <tr>
-              {headers.map((header) => {
+              {selectSpace}
+              {formattedHeaders.map((formattedHeader) => {
                 return (
                   <th className="border border-dark p-1 align-middle">
-                    {header}
+                    {formattedHeader}
                   </th>
                 );
               })}
@@ -30,7 +67,14 @@ export default function Table(props) {
 
           <tbody>
             {rows.map((row) => {
-              return <TableRow row={row} />;
+              return (
+                <TableRow
+                  row={row}
+                  select={select}
+                  selected={selected}
+                  handleSelect={handleSelect}
+                />
+              );
             })}
           </tbody>
         </table>

@@ -12,10 +12,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         ...action.payload,
+        authenticated: true,
       };
     case SIGN_OUT_USER:
       return {
-        ...state,
+        ...initialState,
       };
     default:
       return state;
