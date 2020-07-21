@@ -33,7 +33,8 @@ CREATE TABLE Products(
     expirable TINYINT NOT NULL DEFAULT 0,
     createdAt DATETIME NOT NULL,
     updatedAt DATETIME NOT NULL,
-    unique (code)
+    unique (code),
+    productCount INT NOT NULL
 );
 
 DROP TABLE IF EXISTS Transactions;
