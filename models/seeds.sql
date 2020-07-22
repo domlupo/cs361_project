@@ -36,20 +36,20 @@ INSERT INTO Users (userLevelID, email, password, firstName, lastName, createdAt,
 VALUES ((SELECT userLevelID FROM UserLevels WHERE role = 'cashier'), 'sgoodman@gmail.com', 'password6', 'saul',
         'goodman', NOW(), NOW());
 
-INSERT INTO Products (code, name, descript, price, expirable, createdAt, updatedAt)
-VALUES ('1010', 'tea', '100 count of english breakfast', 2.25, 0, NOW(), NOW());
-INSERT INTO Products (code, name, descript, price, expirable, createdAt, updatedAt)
-VALUES ('1020', 'coffee', '16oz can of preground coffee beans', 8.00, 0, NOW(), NOW());
-INSERT INTO Products (code, name, descript, price, expirable, createdAt, updatedAt)
-VALUES ('2060', 'tuna', '3oz metal can of shredded tuna', 1.10, 0, NOW(), NOW());
-INSERT INTO Products (code, name, descript, price, expirable, createdAt, updatedAt)
-VALUES ('404040', 'pasta', '12oz box of penne', 0.80, 0, NOW(), NOW());
-INSERT INTO Products (code, name, descript, price, expirable, createdAt, updatedAt)
-VALUES ('700700', 'beef', '16 oz package of 90/10', 3.25, 1, NOW(), NOW());
-INSERT INTO Products (code, name, descript, price, expirable, createdAt, updatedAt)
-VALUES ('2030', 'cheese', '16oz chunk of pecorino romano', 12.75, 0, NOW(), NOW());
-INSERT INTO Products (code, name, descript, price, expirable, createdAt, updatedAt)
-VALUES ('1000', 'milk', 'half gallon of milk', 1.50, 1, NOW(), NOW());
+INSERT INTO Products (code, name, descript, price, expirable, createdAt, updatedAt, shelfCount)
+VALUES ('1010', 'tea', '100 count of english breakfast', 2.25, 0, NOW(), NOW(), 1);
+INSERT INTO Products (code, name, descript, price, expirable, createdAt, updatedAt, shelfCount)
+VALUES ('1020', 'coffee', '16oz can of preground coffee beans', 8.00, 0, NOW(), NOW(), 1);
+INSERT INTO Products (code, name, descript, price, expirable, createdAt, updatedAt, shelfCount)
+VALUES ('2060', 'tuna', '3oz metal can of shredded tuna', 1.10, 0, NOW(), NOW(), 1);
+INSERT INTO Products (code, name, descript, price, expirable, createdAt, updatedAt, shelfCount)
+VALUES ('404040', 'pasta', '12oz box of penne', 0.80, 0, NOW(), NOW(), 1);
+INSERT INTO Products (code, name, descript, price, expirable, createdAt, updatedAt, shelfCount)
+VALUES ('700700', 'beef', '16 oz package of 90/10', 3.25, 1, NOW(), NOW(), 1);
+INSERT INTO Products (code, name, descript, price, expirable, createdAt, updatedAt, shelfCount)
+VALUES ('2030', 'cheese', '16oz chunk of pecorino romano', 12.75, 0, NOW(), NOW(), 1);
+INSERT INTO Products (code, name, descript, price, expirable, createdAt, updatedAt, shelfCount)
+VALUES ('1000', 'milk', 'half gallon of milk', 1.50, 1, NOW(), NOW(), 1);
 
 INSERT INTO Transactions (userID, productID, date, productQty, startLoc, endLoc, createdAt, updatedAt)
 VALUES ((SELECT userID FROM Users WHERE firstName = 'thomas'), (SELECT productID FROM Products WHERE name = 'tea'),
