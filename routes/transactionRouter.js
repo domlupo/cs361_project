@@ -10,5 +10,4 @@ transactionRouter.get(
   authService.jwt,
   transactionService.getTransactionById,
 );
-
 module.exports = transactionRouter;

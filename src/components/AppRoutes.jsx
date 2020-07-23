@@ -10,10 +10,12 @@ import Product from './Product/ProductList';
 import Navigation from './Navigation/Navigation';
 import WIP from './shared/WIP';
 import TransactionList from './Transaction/TransactionList';
+import AddTransaction from './Transaction/AddTransaction';
+import history from './Transaction/history';
 
 export default function AppRoutes() {
   return (
-    <Navigation>
+    <Navigation history={history}>
       <Switch>
         <Route path="/signin" component={SignIn} />
         <Route path="/about" component={About} />
@@ -22,6 +24,7 @@ export default function AppRoutes() {
         <Route path="/user-index" component={UsersIndex} />
         <Route path="/user-insert" component={UsersInsert} />
         <Route path="/user-update" component={UsersUpdate} />
+        <Route path="/addtransaction" component={AddTransaction} />
         <Route path="/" component={Product} />
       </Switch>
     </Navigation>
