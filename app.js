@@ -14,6 +14,16 @@ const apiRouter = require('./routes');
 
 const app = express();
 
+app.use('*', (req, res, next) => {
+  if (
+    req.headers['x-forwarded-proto'] !== 'https' &&
+    process.env.NODE_ENV === 'production'
+  ) {
+    res.redirect(`https://${req.hostname}${req.url}`);
+  } else {
+    next(); /* Continue to other routes if we're not redirecting */
+  }
+});
 app.use(logger('dev'));
 app.use(cors());
 app.use(bodyParser.json());
