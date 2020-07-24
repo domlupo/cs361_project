@@ -43,17 +43,14 @@ const updateUser = async (id, data) => {
 };
 
 const createUser = async (data) => {
-  const now = moment().format(constants.dateFormat);
   await db.pool.asyncQuery(
-    'INSERT INTO Users (userLevelID, email, password, firstName, lastName, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?)',
+    'INSERT INTO Users (userLevelID, email, password, firstName, lastName, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, NOW(), NOW())',
     [
       data.userLevelID,
       data.email,
       data.password,
       data.firstName,
       data.lastName,
-      now,
-      now,
     ],
   );
   return getUserForAuthentication(data.email);
