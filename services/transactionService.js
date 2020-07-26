@@ -23,6 +23,7 @@ const getTransactionById = async (req, res, next) => {
 };
 
 const createTransaction = async (transaction) => {
+  console.log(transaction);
   await transactionModel.createTransaction({
     ...transaction,
     userID: transaction.user.userID,

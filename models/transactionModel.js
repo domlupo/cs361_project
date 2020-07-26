@@ -18,8 +18,8 @@ const createTransaction = async (transaction) => {
   await db.pool.asyncQuery(
     'INSERT INTO Transactions (userID, productID, date, productQty, startLoc, endLoc, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, NOW(), NOW())',
     [
-      transaction.userId,
-      transaction.productId,
+      transaction.userID,
+      transaction.productID,
       transaction.date || now,
       transaction.quantity,
       transaction.startLocation,

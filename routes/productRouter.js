@@ -6,5 +6,10 @@ const productRouter = express.Router();
 
 productRouter.get('/', authService.jwt, productService.getAll);
 productRouter.get('/:id', authService.jwt, productService.getProductById);
+productRouter.put(
+  '/:id/sell',
+  [authService.jwt, authService.cashierOnly],
+  productService.sellProduct,
+);
 
 module.exports = productRouter;
