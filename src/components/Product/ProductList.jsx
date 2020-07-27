@@ -1,73 +1,63 @@
-import React, { Component, useReducer } from 'react';
-import API from '../../apis/API'; // library for AJAX functions
-import Table from '../shared/Table';
-import ProductSearch from '../SearchSection/ProductSearch';
+import React, { useEffect, useState } from 'react';
+import ReactLoading from 'react-loading';
+import { includes } from 'lodash';
+
+import API from '../../apis/API';
 import Header, { HeaderPadding } from '../Navigation/Header';
+import ProductListItem from './ProductListItem';
 
-// This component is a class because it has state. Having state is neccesary
-// because the page will render before the AJAX is complete. Once the AJAX
-// is processed and returned from backend we setState() which will automatically
-// rerender the component with the new state. An additional reason this
-// componenet has state is because if AJAX fails, no results will be available
-// to render
-class ProductList extends Component {
-  constructor(props) {
-    super(props);
+import './ProductList.css';
+import SearchBar from '../SearchSection/SearchBar';
 
-    // initial state which will get updated from AJAX
-    this.state = {
-      index: [],
-    };
+function ProductList() {
+  const [products, setProducts] = useState([]);
+  const [productData, setProductData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
 
-    this.getUsers = this.getUsers.bind(this);
-  }
+  const onInputChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
 
-  // after component mounts ( mount is React term for after the initital render)
-  componentDidMount() {
-    // call function to send AJAX to backend
-    this.getUsers();
-  }
+  useEffect(() => {
+    API.instance.get('/product').then((res) => {
+      setProducts(res.data);
+      setProductData(res.data);
+      setLoading(false);
+    });
+  }, []);
 
-  getUsers() {
-    // AJAX call to /api/user
-    API.instance
-      .get('/product')
-      .then((res) => {
-        // update state based on return JSON from backend
-        // React will automatically rerender the component after state updates.
-        // Always use setState to update state. Updating state directly
-        // can cause errors.
-        this.setState({ index: res.data });
-      })
-      .catch((error) => console.log(error.response));
-  }
-
-  // This render function is called when component first renders
-  // e.g. user clicks on link or when setState updates state
-  render() {
-    // set index from state
-    const { index } = this.state;
-
-    // set tableHeaders to index keys unless index is empty set to empty array
-    const tableHeaders = index.length ? Object.keys(index[0]) : [];
-
-    // below is the HTML and components being returned
-    // We can pass data to other React components by using "props"
-    // e.g. The "Table" component has several props. One is called "headers"
-    // and we set the data within headers to "tableHeaders" which is
-    // is set within the render() function.
-    return (
-      <div className="container-fluid text-center">
-        <Header>
-          <ProductSearch />
-        </Header>
-        <HeaderPadding />
-        <Table headers={tableHeaders} rows={index} />
-
-        <br />
-      </div>
+  useEffect(() => {
+    const searchQuery = searchTerm.toLowerCase();
+    const newProducts = productData.filter(
+      (product) =>
+        includes(product.name, searchQuery) ||
+        includes(product.code, searchQuery) ||
+        includes(product.descript, searchQuery),
     );
-  }
+    setProducts(newProducts);
+  }, [searchTerm]);
+
+  const renderData = () => {
+    if (loading) return <ReactLoading color="#e26d5c" />;
+    return (
+      <>
+        {products.map((product) => (
+          <ProductListItem product={product} key={product.productID} />
+        ))}
+      </>
+    );
+  };
+
+  return (
+    <div className="container">
+      <Header>
+        <SearchBar onInputChange={onInputChange} />
+      </Header>
+      <HeaderPadding />
+      <div className="ProductList">{renderData()}</div>
+    </div>
+  );
 }
 
 export default ProductList;

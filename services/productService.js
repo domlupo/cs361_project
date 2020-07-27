@@ -30,22 +30,25 @@ const sellProduct = async (req, res, next) => {
     const { id } = req.params;
     const { body } = req;
     const { user } = res.locals;
-    if (!body?.productQty) {
-      throw new Error('Missing productQty');
+    const quantity = body?.productQty
+      ? Number.parseInt(body?.productQty, 10)
+      : null;
+    if (!quantity) {
+      throw new Error('Missing product quantity');
     }
     product = await productModel.getProductById(id);
-    if (product.shelfCount < body.productQty) {
+    if (product.shelfCount < quantity) {
       throw new Error("There aren't enough available products");
     }
     product = await productModel.editProductQuantity(id, {
-      shelfCount: product.shelfCount - body.productQty,
+      shelfCount: product.shelfCount - quantity,
       inventoryCount: product.inventoryCount,
     });
     await transactionService.addSellTransaction(
       user,
       product,
       utils.getNowFormatted(),
-      body.productQty,
+      quantity,
     );
     res.send(product);
   } catch (e) {

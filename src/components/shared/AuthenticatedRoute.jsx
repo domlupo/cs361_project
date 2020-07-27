@@ -27,5 +27,9 @@ export default function AuthenticatedRoute({
 
 AuthenticatedRoute.propTypes = {
   authenticated: PropTypes.bool.isRequired,
-  component: PropTypes.node.isRequired,
+  component: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.array,
+    PropTypes.func,
+  ]).isRequired,
 };

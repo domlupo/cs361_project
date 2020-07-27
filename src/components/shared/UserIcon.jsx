@@ -1,10 +1,9 @@
 import React from 'react';
-import { capitalize } from 'lodash';
 
 import './UserIcon.css';
 import Icon from './Icon';
 
-export default function UserIcon({ user }) {
+export default function UserIcon() {
   return (
     <div className="UserIcon">
       <Icon icon="fa-user" />

@@ -21,21 +21,23 @@ class SearchBar extends React.Component {
 
   render() {
     const { term } = this.state;
+    const { onInputChange } = this.props;
     return (
-      <div className="search-bar ui segment">
-        <Form onSubmit={this.onFormSubmit} className="ui form">
-          <div className="field">
-            <Form.Label>Query Search</Form.Label>
-            <input type="text" value={term} onChange={this.onInputChange} />
-          </div>
-        </Form>
-      </div>
+      <Form onSubmit={this.onFormSubmit} style={{ width: '100%' }}>
+        <Form.Control
+          type="text"
+          value={onInputChange ? undefined : term}
+          placeholder="Search..."
+          onChange={onInputChange || this.onInputChange}
+        />
+      </Form>
     );
   }
 }
 
 SearchBar.propTypes = {
-  onFormSubmit: PropTypes.func.isRequired,
+  onFormSubmit: PropTypes.func,
+  onInputChange: PropTypes.func,
 };
 
 export default SearchBar;
