@@ -3,8 +3,6 @@ import { Button, Navbar } from 'react-bootstrap';
 import { NavLink, Link, Route, Switch } from 'react-router-dom';
 import API from '../../apis/API'; // library for AJAX functions
 import Header, { HeaderPadding } from '../Navigation/Header';
-import AddTransaction from './AddTransaction';
-import history from './history';
 
 class TransactionList extends Component {
   constructor(props) {
@@ -36,18 +34,6 @@ class TransactionList extends Component {
       <div>
         <Header />
         <HeaderPadding />
-        <Navbar.Brand>
-          <NavLink
-            className="NavigationLink"
-            to="/addtransaction"
-            activeClassName="NavigationLinkActive"
-          >
-            Add New Transactions
-          </NavLink>
-        </Navbar.Brand>
-
-        <br />
-        <br />
         <div className="container-fluid text-center">
           <table className="table-responhsive-p1">
             <tr>
