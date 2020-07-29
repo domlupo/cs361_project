@@ -15,7 +15,8 @@
     "no-use-before-define": "warn",
     "import/prefer-default-export": "warn",
     "consistent-return": "off",
-    "react/prop-types": "warn"
+    "react/prop-types": "warn",
+    "react/require-default-props": "off"
   },
   "env": {
     "browser": true,
