@@ -20,6 +20,21 @@ const editProductQuantity = async (id, { shelfCount, inventoryCount }) => {
   return getProductById(id);
 };
 
+const createProduct = async (data) => {
+  await db.pool.asyncQuery(
+    'INSERT INTO Products (code, name, descript, price, expirable, inventoryCount, shelfCount, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW())',
+    [
+      data.code,
+      data.name,
+      data.descript,
+      data.price,
+      data.expirable,
+      data.inventoryCount,
+      data.shelfCount,
+    ],
+  );
+};
+
 module.exports = {
   getAll,
   getProductById,
