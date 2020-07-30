@@ -1,5 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import About from './About/About';
 import SignIn from './Auth/SignIn';
 import SignUp from './Auth/SignUp';
@@ -23,6 +24,7 @@ export default function AppRoutes() {
         <Route path="/user-update" component={UsersUpdate} />
         <Route path="/" component={Product} />
       </Switch>
+      <ToastContainer />
     </Navigation>
   );
 }
