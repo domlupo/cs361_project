@@ -57,8 +57,42 @@ const sellProduct = async (req, res, next) => {
   }
 };
 
+const restockProduct = async (req, res, next) => {
+  let product;
+  try {
+    const { id } = req.params;
+    const { body } = req;
+    const { user } = res.locals;
+    const quantity = body?.productQty
+      ? Number.parseInt(body?.productQty, 10)
+      : null;
+    if (!quantity) {
+      throw new Error('Missing product quantity');
+    }
+    product = await productModel.getProductById(id);
+    if (product.inventoryCount < quantity) {
+      throw new Error("There aren't enough available products");
+    }
+    product = await productModel.editProductQuantity(id, {
+      shelfCount: product.shelfCount + quantity,
+      inventoryCount: product.inventoryCount - quantity,
+    });
+    await transactionService.addStockTransaction(
+      user,
+      product,
+      utils.getNowFormatted(),
+      quantity,
+    );
+    res.send(product);
+  } catch (e) {
+    console.log(e);
+    next(e);
+  }
+};
+
 module.exports = {
   getProductById,
   getAll,
   sellProduct,
+  restockProduct,
 };
