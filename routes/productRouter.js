@@ -11,5 +11,10 @@ productRouter.put(
   [authService.jwt, authService.cashierOnly],
   productService.sellProduct,
 );
+productRouter.put(
+  '/:id/restock',
+  [authService.jwt, authService.cashierOnly],
+  productService.restockProduct,
+);
 
 module.exports = productRouter;
