@@ -50,7 +50,7 @@ export default function Navigation({ children }) {
         <hr />
       </section>
       <div className="NavigationSideContainer" />
-      <section>{children}</section>
+      <section className="NavigationMain">{children}</section>
     </main>
   );
 }

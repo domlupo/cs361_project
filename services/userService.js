@@ -52,7 +52,9 @@ const create = async (req, res, next) => {
     .then(async (validatedUser) => {
       const savedUser = await userModel.createUser(validatedUser);
       req.logIn(savedUser, () => {
-        const token = jwt.sign({ id: user.email }, process.env.JWT_SECRET);
+        const token = jwt.sign({ id: user.email }, process.env.JWT_SECRET, {
+          expiresIn: '1d',
+        });
         delete savedUser.password;
         res.status(200).send({
           user: savedUser,
@@ -69,7 +71,9 @@ const create = async (req, res, next) => {
 const login = async (req, res, next) => {
   const { user } = res.locals;
   req.logIn(user, () => {
-    const token = jwt.sign({ id: user.email }, process.env.JWT_SECRET);
+    const token = jwt.sign({ id: user.email }, process.env.JWT_SECRET, {
+      expiresIn: '1d',
+    });
     res.status(200).send({
       user,
       token,
