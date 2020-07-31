@@ -3,7 +3,9 @@ const db = require('./db');
 const constants = require('../constants/constants');
 
 const getAll = async () => {
-  return db.pool.asyncQuery('SELECT * FROM Transactions');
+  return db.pool.asyncQuery(
+    'SELECT * FROM Transactions INNER JOIN Products on Transactions.productID = Products.productID',
+  );
 };
 
 const getTransactionById = async (id) => {
