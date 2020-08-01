@@ -11,5 +11,10 @@ productRouter.put(
   [authService.jwt, authService.cashierOnly],
   productService.sellProduct,
 );
+productRouter.put(
+  '/:id/purchase',
+  [authService.jwt, authService.buyerOnly],
+  productService.purchaseProduct,
+);
 
 module.exports = productRouter;
