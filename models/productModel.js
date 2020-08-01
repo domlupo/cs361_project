@@ -12,6 +12,14 @@ const getProductById = async (id) => {
   return data[0];
 };
 
+const getProductByCode = async (code) => {
+  const data = await db.pool.asyncQuery(
+    'SELECT * FROM Products WHERE productID = ?',
+    [code],
+  );
+  return data[0];
+};
+
 const editProductQuantity = async (id, { shelfCount, inventoryCount }) => {
   await db.pool.asyncQuery(
     'UPDATE Products SET inventoryCount = ?, shelfCount = ? WHERE productID = ?',
@@ -29,10 +37,11 @@ const createProduct = async (data) => {
       data.descript,
       data.price,
       data.expirable,
-      data.inventoryCount,
-      data.shelfCount,
+      0, // consider setting data.inventoryCount = 0 and data.shelfCount = 0
+      0, // earlier in flow and passing those
     ],
   );
+  return getProductByCode(data.code);
 };
 
 module.exports = {
