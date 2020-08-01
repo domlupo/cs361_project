@@ -12,6 +12,11 @@ productRouter.put(
   productService.sellProduct,
 );
 productRouter.put(
+  '/:id/restock',
+  [authService.jwt, authService.buyerOnly],
+  productService.restockProduct,
+);
+productRouter.put(
   '/:id/purchase',
   [authService.jwt, authService.buyerOnly],
   productService.purchaseProduct,
