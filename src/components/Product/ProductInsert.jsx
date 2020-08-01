@@ -104,7 +104,7 @@ class ProductInsert extends Component {
                     <FormLabel>Product ID Code</FormLabel>
                     <FormControl
                       name="code"
-                      type="number"
+                      type="text"
                       value={code}
                       onChange={this.handleChange}
                     />

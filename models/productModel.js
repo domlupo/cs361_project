@@ -14,7 +14,7 @@ const getProductById = async (id) => {
 
 const getProductByCode = async (code) => {
   const data = await db.pool.asyncQuery(
-    'SELECT * FROM Products WHERE productID = ?',
+    'SELECT * FROM Products WHERE code = ?',
     [code],
   );
   return data[0];
@@ -33,7 +33,7 @@ const createProduct = async (data) => {
     'INSERT INTO Products (code, name, descript, price, expirable, inventoryCount, shelfCount, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW())',
     [
       data.code,
-      data.name,
+      data.prodName,
       data.descript,
       data.price,
       data.expirable,
@@ -41,7 +41,8 @@ const createProduct = async (data) => {
       0, // earlier in flow and passing those
     ],
   );
-  return getProductByCode(data.code);
+  const savedProd = await getProductByCode(data.code);
+  return savedProd;
 };
 
 module.exports = {

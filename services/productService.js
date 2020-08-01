@@ -1,3 +1,4 @@
+const yup = require('yup');
 const productModel = require('../models/productModel');
 const transactionService = require('./transactionService');
 const utils = require('../utils/serverUtils');
@@ -24,51 +25,29 @@ const getProductById = async (req, res, next) => {
   }
 };
 
-/// /////////////////////////////
-/// TO DO fix this. Was copied from userService.create
-// const create = async (req, res, next) => {
-//   const { newProduct } = res.locals;
-//   const product = {
-//     ...req.body,
-//     password: passportUser.password,
-//     email: passportUser.email,
-//   };
+const create = async (req, res, next) => {
+  const newProd = req.body;
 
-//   const userLevels = await userLevelModel.getAll();
+  // validation of schema for necessary fields
+  const schema = yup.object().shape({
+    prodName: yup.string().required(),
+    code: yup.string().required(), // TO DO: force this to be unique
+    descript: yup.string().required(),
+    price: yup.number().required(),
+    expirable: yup.number().required(), // TO DO: change to bool and/or only allow 1 or 0 on front end
+  });
 
-//   // validation of schema for necessary fields
-//   const schema = yup.object().shape({
-//     email: yup.string().email().required(),
-//     password: yup.string().required(),
-//     firstName: yup.string().required(),
-//     lastName: yup.string().required(),
-//     userLevelID: yup
-//       .number()
-//       .oneOf(userLevels.map((userLevel) => userLevel.userLevelID))
-//       .required(),
-//   });
-
-//   schema
-//     .validate(user)
-//     .then(async (validatedUser) => {
-//       const savedUser = await userModel.createUser(validatedUser);
-//       req.logIn(savedUser, () => {
-//         const token = jwt.sign({ id: user.email }, process.env.JWT_SECRET, {
-//           expiresIn: '1d',
-//         });
-//         delete savedUser.password;
-//         res.status(200).send({
-//           user: savedUser,
-//           token,
-//         });
-//       });
-//     })
-//     .catch((error) => {
-//       res.status(400);
-//       res.send(error);
-//     });
-// };
-/// //////////
+  schema
+    .validate(newProd)
+    .then(async (validatedProd) => {
+      const savedProd = await productModel.createProduct(validatedProd);
+      console.log(`saved prod is ${savedProd}`);
+    })
+    .catch((error) => {
+      res.status(400);
+      res.send(error);
+    });
+};
 
 const sellProduct = async (req, res, next) => {
   let product;
@@ -107,6 +86,7 @@ const sellProduct = async (req, res, next) => {
 
 module.exports = {
   getProductById,
+  create,
   getAll,
   sellProduct,
 };
