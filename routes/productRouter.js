@@ -16,5 +16,10 @@ productRouter.put(
   [authService.jwt, authService.buyerOnly],
   productService.restockProduct,
 );
+productRouter.put(
+  '/:id/purchase',
+  [authService.jwt, authService.buyerOnly],
+  productService.purchaseProduct,
+);
 
 module.exports = productRouter;
