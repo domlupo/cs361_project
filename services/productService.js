@@ -41,7 +41,9 @@ const create = async (req, res, next) => {
     .validate(newProd)
     .then(async (validatedProd) => {
       const savedProd = await productModel.createProduct(validatedProd);
-      console.log(`saved prod is ${savedProd}`);
+      res.status(200).send({
+        product: savedProd,
+      });
     })
     .catch((error) => {
       res.status(400);
