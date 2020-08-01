@@ -128,7 +128,10 @@ class ProductInsert extends Component {
                     />
                   </FormGroup>
                   <FormGroup bssize="large">
-                    <FormLabel>Is Product Expirable?</FormLabel>
+                    <FormLabel>
+                      Product Expirable? <br />
+                      Enter 1 for Yes, and 0 for No
+                    </FormLabel>
                     <FormControl
                       name="expirable"
                       type="text"
