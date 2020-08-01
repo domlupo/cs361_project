@@ -14,7 +14,7 @@ productRouter.put(
 
 productRouter.post(
   '/create',
-  [authService.jwt, authService.buyerOnly],
+  [authService.jwt, authService.managementOnly],
   productService.create,
 );
 
