@@ -39,4 +39,5 @@ module.exports = {
   getAll,
   getProductById,
   editProductQuantity,
+  createProduct,
 };
