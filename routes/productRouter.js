@@ -12,4 +12,7 @@ productRouter.put(
   productService.sellProduct,
 );
 
+// productRouter.post for insert product
+// mimic authservice of sell, but check for proper user type
+
 module.exports = productRouter;

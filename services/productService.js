@@ -57,6 +57,8 @@ const sellProduct = async (req, res, next) => {
   }
 };
 
+// TO DO: need a create product service copy from user service create
+
 module.exports = {
   getProductById,
   getAll,
