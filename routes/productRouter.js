@@ -13,7 +13,7 @@ productRouter.put(
 );
 productRouter.put(
   '/:id/purchase',
-  [authService.jwt, authService.cashierOnly],
+  [authService.jwt, authService.buyerOnly],
   productService.purchaseProduct,
 );
 

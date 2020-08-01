@@ -69,6 +69,7 @@ const purchaseProduct = async (req, res, next) => {
     if (!quantity) {
       throw new Error('Missing product quantity');
     }
+    product = await productModel.getProductById(id);
     product = await productModel.editProductQuantity(id, {
       shelfCount: product.shelfCount,
       inventoryCount: product.inventoryCount + quantity,
