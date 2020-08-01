@@ -24,6 +24,52 @@ const getProductById = async (req, res, next) => {
   }
 };
 
+/// /////////////////////////////
+/// TO DO fix this. Was copied from userService.create
+// const create = async (req, res, next) => {
+//   const { newProduct } = res.locals;
+//   const product = {
+//     ...req.body,
+//     password: passportUser.password,
+//     email: passportUser.email,
+//   };
+
+//   const userLevels = await userLevelModel.getAll();
+
+//   // validation of schema for necessary fields
+//   const schema = yup.object().shape({
+//     email: yup.string().email().required(),
+//     password: yup.string().required(),
+//     firstName: yup.string().required(),
+//     lastName: yup.string().required(),
+//     userLevelID: yup
+//       .number()
+//       .oneOf(userLevels.map((userLevel) => userLevel.userLevelID))
+//       .required(),
+//   });
+
+//   schema
+//     .validate(user)
+//     .then(async (validatedUser) => {
+//       const savedUser = await userModel.createUser(validatedUser);
+//       req.logIn(savedUser, () => {
+//         const token = jwt.sign({ id: user.email }, process.env.JWT_SECRET, {
+//           expiresIn: '1d',
+//         });
+//         delete savedUser.password;
+//         res.status(200).send({
+//           user: savedUser,
+//           token,
+//         });
+//       });
+//     })
+//     .catch((error) => {
+//       res.status(400);
+//       res.send(error);
+//     });
+// };
+/// //////////
+
 const sellProduct = async (req, res, next) => {
   let product;
   try {

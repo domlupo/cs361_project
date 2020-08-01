@@ -11,7 +11,11 @@ productRouter.put(
   [authService.jwt, authService.cashierOnly],
   productService.sellProduct,
 );
-
+// productRouter.post(
+//   '/create',
+//   [authService.jwt, authService.buyerOnly],
+//   productService.create,
+//   );  //TO DO: write productService.create
 // productRouter.post for insert product
 // mimic authservice of sell, but check for proper user type
 
