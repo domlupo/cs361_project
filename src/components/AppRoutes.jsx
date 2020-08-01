@@ -22,8 +22,8 @@ export default function AppRoutes() {
         <Route path="/user-index" component={UsersIndex} />
         <Route path="/user-insert" component={UsersInsert} />
         <Route path="/user-update" component={UsersUpdate} />
-        <Route path="/" component={Product} />
         <Route path="/product-insert" component={ProductInsert} />
+        <Route path="/" component={Product} />
       </Switch>
     </Navigation>
   );
