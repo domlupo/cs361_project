@@ -10,7 +10,7 @@ import {
   FormControl,
 } from 'react-bootstrap';
 import API from '../../apis/API';
-import { getIDfromRole, validRole } from '../shared/userRoleHelpers';
+// import { getIDfromRole, validRole } from '../shared/userRoleHelpers';
 import Header, { HeaderPadding } from '../Navigation/Header';
 import '../Auth/Sign.css';
 
@@ -43,18 +43,6 @@ class ProductInsert extends Component {
 
   handleSubmit(e) {
     const { prodName, code, descript, price, expirable } = this.state;
-
-    // check if valid role inputted
-    // if (!validRole(userRole)) {
-    //   this.setState({
-    //     successMessage: null,
-    //     errorMessage: 'Please input a valid role',
-    //   });
-
-    //   return;
-    // }
-
-    // const userLevelID = getIDfromRole(userRole);
 
     API.instance
       .post(`/product/create`, {
