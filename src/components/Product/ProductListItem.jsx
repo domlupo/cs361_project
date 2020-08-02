@@ -32,10 +32,42 @@ export default function ProductListItem({ product: propProduct }) {
       });
   };
 
+  const restockProduct = (productQty) => {
+    API.instance
+      .put(`/product/${product.productID}/restock`, { productQty })
+      .then(({ data }) => {
+        console.log(data);
+        setProduct(data);
+        setQuantity(0);
+        setModal('');
+      })
+      .catch((err) => {
+        setError(err?.response?.data?.error ?? 'An unexpected error occurred');
+      });
+  };
+
+  const purchaseProduct = (productQty) => {
+    API.instance
+      .put(`/product/${product.productID}/purchase`, { productQty })
+      .then(({ data }) => {
+        console.log(data);
+        setProduct(data);
+        setQuantity(0);
+        setModal('');
+      })
+      .catch((err) => {
+        setError(err?.response?.data?.error ?? 'An unexpected error occurred');
+      });
+  };
+
   const onModalClick = () => {
     if (!quantity) return;
     if (modal === SELL) {
       sellProduct(quantity);
+    } else if (modal === PURCHASE) {
+      purchaseProduct(quantity);
+    } else if (modal === RESTOCK) {
+      restockProduct(quantity);
     }
   };
 

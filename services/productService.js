@@ -31,10 +31,10 @@ const create = async (req, res, next) => {
   // validation of schema for necessary fields
   const schema = yup.object().shape({
     prodName: yup.string().required(),
-    code: yup.string().required(), // TO DO: force this to be unique
+    code: yup.string().required(), 
     descript: yup.string().required(),
     price: yup.number().required(),
-    expirable: yup.number().required(), // TO DO: change to bool and/or only allow 1 or 0 on front end
+    expirable: yup.number().required(), 
   });
 
   schema
@@ -84,11 +84,76 @@ const sellProduct = async (req, res, next) => {
   }
 };
 
-// TO DO: need a create product service copy from user service create
+
+const restockProduct = async (req, res, next) => {
+  let product;
+  try {
+    const { id } = req.params;
+    const { body } = req;
+    const { user } = res.locals;
+    const quantity = body?.productQty
+      ? Number.parseInt(body?.productQty, 10)
+      : null;
+    if (!quantity) {
+      throw new Error('Missing product quantity');
+    }
+    product = await productModel.getProductById(id);
+    if (product.inventoryCount < quantity) {
+      throw new Error("There aren't enough available products");
+    }
+    product = await productModel.editProductQuantity(id, {
+      shelfCount: product.shelfCount + quantity,
+      inventoryCount: product.inventoryCount - quantity,
+    });
+    await transactionService.addStockTransaction(
+      user,
+      product,
+      utils.getNowFormatted(),
+      quantity,
+    );
+    res.send(product);
+  } catch (e) {
+    console.log(e);
+    next(e);
+  }
+};
+
+const purchaseProduct = async (req, res, next) => {
+  let product;
+  try {
+    const { id } = req.params;
+    const { body } = req;
+    const { user } = res.locals;
+    const quantity = body?.productQty
+      ? Number.parseInt(body?.productQty, 10)
+      : null;
+    if (!quantity) {
+      throw new Error('Missing product quantity');
+    }
+    product = await productModel.getProductById(id);
+    product = await productModel.editProductQuantity(id, {
+      shelfCount: product.shelfCount,
+      inventoryCount: product.inventoryCount + quantity,
+    });
+    await transactionService.addPurchaseTransaction(
+      user,
+      product,
+      utils.getNowFormatted(),
+      quantity,
+    );
+    res.send(product);
+  } catch (e) {
+    console.log(e);
+    next(e);
+  }
+};
+
 
 module.exports = {
   getProductById,
   create,
   getAll,
   sellProduct,
+  purchaseProduct,
+  restockProduct,
 };
