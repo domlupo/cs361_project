@@ -8,6 +8,7 @@ import UsersIndex from './Users/UsersIndex';
 import UsersInsert from './Users/UsersInsert';
 import UsersUpdate from './Users/UsersUpdate';
 import Product from './Product/ProductList';
+import ProductInsert from './Product/ProductInsert';
 import Navigation from './Navigation/Navigation';
 import WIP from './shared/WIP';
 import TransactionList from './Transaction/TransactionList';
@@ -23,6 +24,7 @@ export default function AppRoutes() {
         <Route path="/user-index" component={UsersIndex} />
         <Route path="/user-insert" component={UsersInsert} />
         <Route path="/user-update" component={UsersUpdate} />
+        <Route path="/product-insert" component={ProductInsert} />
         <Route path="/" component={Product} />
       </Switch>
       <ToastContainer />

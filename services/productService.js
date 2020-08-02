@@ -1,3 +1,4 @@
+const yup = require('yup');
 const productModel = require('../models/productModel');
 const transactionService = require('./transactionService');
 const utils = require('../utils/serverUtils');
@@ -22,6 +23,32 @@ const getProductById = async (req, res, next) => {
     console.log(e);
     next(e);
   }
+};
+
+const create = async (req, res, next) => {
+  const newProd = req.body;
+
+  // validation of schema for necessary fields
+  const schema = yup.object().shape({
+    prodName: yup.string().required(),
+    code: yup.string().required(), 
+    descript: yup.string().required(),
+    price: yup.number().required(),
+    expirable: yup.number().required(), 
+  });
+
+  schema
+    .validate(newProd)
+    .then(async (validatedProd) => {
+      const savedProd = await productModel.createProduct(validatedProd);
+      res.status(200).send({
+        product: savedProd,
+      });
+    })
+    .catch((error) => {
+      res.status(400);
+      res.send(error);
+    });
 };
 
 const sellProduct = async (req, res, next) => {
@@ -56,6 +83,7 @@ const sellProduct = async (req, res, next) => {
     next(e);
   }
 };
+
 
 const restockProduct = async (req, res, next) => {
   let product;
@@ -120,8 +148,10 @@ const purchaseProduct = async (req, res, next) => {
   }
 };
 
+
 module.exports = {
   getProductById,
+  create,
   getAll,
   sellProduct,
   purchaseProduct,

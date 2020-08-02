@@ -22,4 +22,10 @@ productRouter.put(
   productService.purchaseProduct,
 );
 
+productRouter.post(
+  '/create',
+  [authService.jwt, authService.managementOnly],
+  productService.create,
+);
+
 module.exports = productRouter;

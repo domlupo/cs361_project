@@ -28,6 +28,13 @@ export default function Navigation({ children }) {
         </NavLink>
         <NavLink
           className="NavigationLink"
+          to="/product-insert"
+          activeClassName="NavigationLinkActive"
+        >
+          Add New Product Type
+        </NavLink>
+        <NavLink
+          className="NavigationLink"
           to="/transactions"
           activeClassName="NavigationLinkActive"
         >
