@@ -52,26 +52,47 @@ INSERT INTO Products (code, name, descript, price, expirable, createdAt, updated
 VALUES ('1000', 'milk', 'half gallon of milk', 1.50, 1, NOW(), NOW(), 5, 15);
 
 INSERT INTO Transactions (userID, productID, date, productQty, startLoc, endLoc, createdAt, updatedAt)
-VALUES ((SELECT userID FROM Users WHERE firstName = 'thomas'), (SELECT productID FROM Products WHERE name = 'tea'),
-        NOW(), 30, 'inventory', 'shelf', NOW(), NOW());
+VALUES ((SELECT userID FROM Users WHERE firstName = 'joe'), (SELECT productID FROM Products WHERE name = 'tea'),
+        NOW(), 231, 'supplier', 'inventory', NOW(), NOW());
 INSERT INTO Transactions (userID, productID, date, productQty, startLoc, endLoc, createdAt, updatedAt)
-VALUES ((SELECT userID FROM Users WHERE firstName = 'jane'), (SELECT productID FROM Products WHERE name = 'coffee'),
-        NOW(), 20, 'inventory', 'shelf', NOW(), NOW());
+VALUES ((SELECT userID FROM Users WHERE firstName = 'thomas'), (SELECT productID FROM Products WHERE name = 'coffee'),
+        NOW(), 31, 'supplier', 'inventory', NOW(), NOW());
 INSERT INTO Transactions (userID, productID, date, productQty, startLoc, endLoc, createdAt, updatedAt)
-VALUES ((SELECT userID FROM Users WHERE firstName = 'jane'), (SELECT productID FROM Products WHERE name = 'tuna'),
-        NOW(), 45, 'inventory', 'shelf', NOW(), NOW());
+VALUES ((SELECT userID FROM Users WHERE firstName = 'thomas'), (SELECT productID FROM Products WHERE name = 'tuna'),
+        NOW(), 13, 'supplier', 'inventory', NOW(), NOW());
 INSERT INTO Transactions (userID, productID, date, productQty, startLoc, endLoc, createdAt, updatedAt)
-VALUES ((SELECT userID FROM Users WHERE firstName = 'jane'), (SELECT productID FROM Products WHERE name = 'pasta'),
-        NOW(), 35, 'inventory', 'shelf', NOW(), NOW());
+VALUES ((SELECT userID FROM Users WHERE firstName = 'thomas'), (SELECT productID FROM Products WHERE name = 'pasta'),
+        NOW(), 30, 'supplier', 'inventory', NOW(), NOW());
 INSERT INTO Transactions (userID, productID, date, productQty, startLoc, endLoc, createdAt, updatedAt)
-VALUES ((SELECT userID FROM Users WHERE firstName = 'joey'), (SELECT productID FROM Products WHERE name = 'beef'),
-        NOW(), 20, 'inventory', 'shelf', NOW(), NOW());
+VALUES ((SELECT userID FROM Users WHERE firstName = 'jane'), (SELECT productID FROM Products WHERE name = 'beef'),
+        NOW(), 29, 'supplier', 'inventory', NOW(), NOW());
 INSERT INTO Transactions (userID, productID, date, productQty, startLoc, endLoc, createdAt, updatedAt)
-VALUES ((SELECT userID FROM Users WHERE firstName = 'joey'), (SELECT productID FROM Products WHERE name = 'cheese'),
-        NOW(), 5, 'inventory', 'shelf', NOW(), NOW());
+VALUES ((SELECT userID FROM Users WHERE firstName = 'jane'), (SELECT productID FROM Products WHERE name = 'cheese'),
+        NOW(), 4, 'supplier', 'inventory', NOW(), NOW());
 INSERT INTO Transactions (userID, productID, date, productQty, startLoc, endLoc, createdAt, updatedAt)
 VALUES ((SELECT userID FROM Users WHERE firstName = 'joey'), (SELECT productID FROM Products WHERE name = 'milk'),
-        NOW(), 110, 'inventory', 'shelf', NOW(), NOW());
+        NOW(), 31, 'supplier', 'inventory', NOW(), NOW());
+INSERT INTO Transactions (userID, productID, date, productQty, startLoc, endLoc, createdAt, updatedAt)
+VALUES ((SELECT userID FROM Users WHERE firstName = 'thomas'), (SELECT productID FROM Products WHERE name = 'tea'),
+        NOW(), 216, 'inventory', 'shelf', NOW(), NOW());
+INSERT INTO Transactions (userID, productID, date, productQty, startLoc, endLoc, createdAt, updatedAt)
+VALUES ((SELECT userID FROM Users WHERE firstName = 'jane'), (SELECT productID FROM Products WHERE name = 'coffee'),
+        NOW(), 11, 'inventory', 'shelf', NOW(), NOW());
+INSERT INTO Transactions (userID, productID, date, productQty, startLoc, endLoc, createdAt, updatedAt)
+VALUES ((SELECT userID FROM Users WHERE firstName = 'jane'), (SELECT productID FROM Products WHERE name = 'tuna'),
+        NOW(), 3, 'inventory', 'shelf', NOW(), NOW());
+INSERT INTO Transactions (userID, productID, date, productQty, startLoc, endLoc, createdAt, updatedAt)
+VALUES ((SELECT userID FROM Users WHERE firstName = 'jane'), (SELECT productID FROM Products WHERE name = 'pasta'),
+        NOW(), 30, 'inventory', 'shelf', NOW(), NOW());
+INSERT INTO Transactions (userID, productID, date, productQty, startLoc, endLoc, createdAt, updatedAt)
+VALUES ((SELECT userID FROM Users WHERE firstName = 'joey'), (SELECT productID FROM Products WHERE name = 'beef'),
+        NOW(), 24, 'inventory', 'shelf', NOW(), NOW());
+INSERT INTO Transactions (userID, productID, date, productQty, startLoc, endLoc, createdAt, updatedAt)
+VALUES ((SELECT userID FROM Users WHERE firstName = 'joey'), (SELECT productID FROM Products WHERE name = 'cheese'),
+        NOW(), 1, 'inventory', 'shelf', NOW(), NOW());
+INSERT INTO Transactions (userID, productID, date, productQty, startLoc, endLoc, createdAt, updatedAt)
+VALUES ((SELECT userID FROM Users WHERE firstName = 'joey'), (SELECT productID FROM Products WHERE name = 'milk'),
+        NOW(), 26, 'inventory', 'shelf', NOW(), NOW());
 INSERT INTO Transactions (userID, productID, date, productQty, startLoc, endLoc, createdAt, updatedAt)
 VALUES ((SELECT userID FROM Users WHERE firstName = 'gus'), (SELECT productID FROM Products WHERE name = 'tuna'), NOW(),
         2, 'shelf', 'sold', NOW(), NOW());
