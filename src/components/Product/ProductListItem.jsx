@@ -5,10 +5,12 @@ import { capitalize, round } from 'lodash';
 import { useSelector } from 'react-redux';
 import API from '../../apis/API';
 import { isBuyer, isCashier } from '../../util/util';
+import Icon from '../shared/Icon';
 
 const SELL = 'SELL';
 const PURCHASE = 'PURCHASE';
 const RESTOCK = 'RESTOCK';
+const NOTIFICATION = 'NOTIFICATION';
 
 export default function ProductListItem({ product: propProduct }) {
   const [product, setProduct] = useState(propProduct);
@@ -22,7 +24,6 @@ export default function ProductListItem({ product: propProduct }) {
     API.instance
       .put(`/product/${product.productID}/sell`, { productQty })
       .then(({ data }) => {
-        console.log(data);
         setProduct(data);
         setQuantity(0);
         setModal('');
@@ -36,7 +37,6 @@ export default function ProductListItem({ product: propProduct }) {
     API.instance
       .put(`/product/${product.productID}/restock`, { productQty })
       .then(({ data }) => {
-        console.log(data);
         setProduct(data);
         setQuantity(0);
         setModal('');
@@ -50,7 +50,21 @@ export default function ProductListItem({ product: propProduct }) {
     API.instance
       .put(`/product/${product.productID}/purchase`, { productQty })
       .then(({ data }) => {
-        console.log(data);
+        setProduct(data);
+        setQuantity(0);
+        setModal('');
+      })
+      .catch((err) => {
+        setError(err?.response?.data?.error ?? 'An unexpected error occurred');
+      });
+  };
+
+  const setNotificationCount = (productQty) => {
+    API.instance
+      .put(`/product/${product.productID}/notification`, {
+        notificationCount: productQty,
+      })
+      .then(({ data }) => {
         setProduct(data);
         setQuantity(0);
         setModal('');
@@ -68,18 +82,32 @@ export default function ProductListItem({ product: propProduct }) {
       purchaseProduct(quantity);
     } else if (modal === RESTOCK) {
       restockProduct(quantity);
+    } else if (modal === NOTIFICATION) {
+      setNotificationCount(quantity);
     }
+  };
+
+  const setNotificationModal = (e) => {
+    e.preventDefault();
+    setQuantity(product.notificationCount);
+    setModal(NOTIFICATION);
   };
 
   const renderModal = () => {
     return (
       <Modal show={!!modal} onHide={() => setModal('')} centered>
         <Modal.Header closeButton>
-          <Modal.Title>{capitalize(modal)} Product</Modal.Title>
+          <Modal.Title>
+            {capitalize(product.name)} {capitalize(modal)}
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Label>Quantity</Form.Label>
+            <Form.Label>
+              {modal === NOTIFICATION
+                ? 'Low shelf stock warning at quantity:'
+                : 'Quantity:'}
+            </Form.Label>
             <Form.Control
               type="number"
               min="0"
@@ -120,6 +148,18 @@ export default function ProductListItem({ product: propProduct }) {
         <Card.Body>
           <Card.Text>On shelf: {product.shelfCount}</Card.Text>
           <Card.Text>In inventory: {product.inventoryCount}</Card.Text>
+          {isBuyer(user) && (
+            <Card.Text>
+              Notify at: {product.notificationCount}
+              <button
+                className="btn"
+                type="button"
+                onClick={setNotificationModal}
+              >
+                <Icon icon="fa-edit" />
+              </button>
+            </Card.Text>
+          )}
         </Card.Body>
         <div className="ProductListItemButtons">
           {isCashier(user) && (

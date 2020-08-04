@@ -24,17 +24,14 @@ function ProductList() {
     setSearchTerm(e.target.value);
   };
   useEffect(() => {
-    API.instance.get('/product').then((res) => {
-      setProducts(res.data);
-      setProductData(res.data);
+    API.instance.get('/product').then(({ data }) => {
+      setProducts(data);
+      setProductData(data);
 
       if (isBuyer(user)) {
-        res.data.forEach((product) => {
-          if (product.shelfCount < 10) {
+        data.forEach((product) => {
+          if (product.shelfCount < product.notificationCount && isBuyer(user)) {
             toast(`${capitalize(product.name)} is low in shelf stock`);
-          }
-          if (product.inventoryCount < 10) {
-            toast(`${capitalize(product.name)} is low in inventory stock`);
           }
         });
       }

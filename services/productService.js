@@ -31,10 +31,11 @@ const create = async (req, res, next) => {
   // validation of schema for necessary fields
   const schema = yup.object().shape({
     prodName: yup.string().required(),
-    code: yup.string().required(), 
+    code: yup.string().required(),
     descript: yup.string().required(),
     price: yup.number().required(),
-    expirable: yup.number().required(), 
+    expirable: yup.number().required(),
+    notificationCount: yup.number().required(),
   });
 
   schema
@@ -83,7 +84,6 @@ const sellProduct = async (req, res, next) => {
     next(e);
   }
 };
-
 
 const restockProduct = async (req, res, next) => {
   let product;
@@ -148,6 +148,27 @@ const purchaseProduct = async (req, res, next) => {
   }
 };
 
+const editProductNotificationCount = async (req, res, next) => {
+  let product;
+  try {
+    const { id } = req.params;
+    const { body } = req;
+    const { user } = res.locals;
+    const quantity = body?.notificationCount
+      ? Number.parseInt(body?.notificationCount, 10)
+      : null;
+    if (!quantity) {
+      throw new Error('Missing notification count');
+    }
+    product = await productModel.editProductNotificationCount(id, {
+      notificationCount: quantity,
+    });
+    res.send(product);
+  } catch (e) {
+    console.log(e);
+    next(e);
+  }
+};
 
 module.exports = {
   getProductById,
@@ -156,4 +177,5 @@ module.exports = {
   sellProduct,
   purchaseProduct,
   restockProduct,
+  editProductNotificationCount,
 };
