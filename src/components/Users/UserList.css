@@ -1,0 +1,32 @@
+.UserList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 25px 10px;
+  width: 100%;
+}
+
+.UserListItem {
+  flex: 1;
+  width: 75%;
+  margin-bottom: 25px;
+}
+
+.UserListItemDetails {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.UserListItemButtons {
+  display: flex;
+  flex-direction: column;
+}
+
+.UserListItemButton {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+}

@@ -42,7 +42,7 @@ export default function Navigation({ children }) {
         </NavLink>
         <NavLink
           className="NavigationLink"
-          to="/user-index"
+          to="/user-list"
           activeClassName="NavigationLinkActive"
         >
           Users
