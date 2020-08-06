@@ -1,34 +1,9 @@
 import React, { Component, useState } from 'react';
-import {
-  Button,
-  Form,
-  Container,
-  Row,
-  Col,
-  FormLabel,
-  FormGroup,
-  FormControl,
-} from 'react-bootstrap';
+import { Button, Container, Row, Col } from 'react-bootstrap';
 import API from '../../apis/API';
-// import { getIDfromRole, validRole } from '../shared/userRoleHelpers';
+import InputBox from '../shared/entryFormHelpers';
 import Header, { HeaderPadding } from '../Navigation/Header';
 import '../Auth/Sign.css';
-
-function InputBox(props) {
-  const { label, name, type, dataVal, handleChange } = props;
-
-  return (
-    <FormGroup controlId={name} bssize="large">
-      <FormLabel>{label}</FormLabel>
-      <FormControl
-        name={name}
-        type={type}
-        value={dataVal}
-        onChange={handleChange}
-      />
-    </FormGroup>
-  );
-}
 
 class ProductInsert extends Component {
   constructor(props) {
@@ -113,45 +88,39 @@ class ProductInsert extends Component {
                     dataVal={prodName}
                     handleChange={this.handleChange}
                   />
-                  <FormGroup bssize="large">
-                    <FormLabel>Product ID Code</FormLabel>
-                    <FormControl
-                      name="code"
-                      type="text"
-                      value={code}
-                      onChange={this.handleChange}
-                    />
-                  </FormGroup>
-                  <FormGroup controlId="descript" bssize="large">
-                    <FormLabel>Description</FormLabel>
-                    <FormControl
-                      name="descript"
-                      type="text"
-                      value={descript}
-                      onChange={this.handleChange}
-                    />
-                  </FormGroup>
-                  <FormGroup bssize="large">
-                    <FormLabel>Price in $</FormLabel>
-                    <FormControl
-                      name="price"
-                      type="number"
-                      value={price}
-                      onChange={this.handleChange}
-                    />
-                  </FormGroup>
-                  <FormGroup bssize="large">
-                    <FormLabel>
-                      Product Expirable? <br />
-                      Enter 1 for Yes, and 0 for No
-                    </FormLabel>
-                    <FormControl
-                      name="expirable"
-                      type="text"
-                      value={expirable}
-                      onChange={this.handleChange}
-                    />
-                  </FormGroup>
+
+                  <InputBox
+                    label="Product ID Code"
+                    name="code"
+                    type="text"
+                    dataVal={code}
+                    handleChange={this.handleChange}
+                  />
+
+                  <InputBox
+                    label="Description"
+                    name="descript"
+                    type="text"
+                    dataVal={descript}
+                    handleChange={this.handleChange}
+                  />
+
+                  <InputBox
+                    label="Price in $"
+                    name="price"
+                    type="number"
+                    dataVal={price}
+                    handleChange={this.handleChange}
+                  />
+
+                  <InputBox
+                    label="Does this product have an expiration date? Enter 1 for Yes, and enter 0 for No"
+                    name="expirable"
+                    type="text"
+                    dataVal={expirable}
+                    handleChange={this.handleChange}
+                  />
+
                   <Button onClick={this.handleSubmit}>Submit</Button>
                   {successMessage && (
                     <p className="text-success">{successMessage}</p>
