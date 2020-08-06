@@ -9,6 +9,7 @@ const getUserLevelById = async (id) => {
     'SELECT * FROM UserLevels WHERE userLevelID = ?',
     [id],
   );
+  return data[0];
 };
 
 module.exports = {

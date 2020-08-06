@@ -26,9 +26,11 @@ const getUserById = async (id) => {
 };
 
 const deleteUserFromDB = async (id) => {
-  await db.pool.asyncQuery('DELETE FROM Users where userID = ?', [id]);
+  const data = await db.pool.asyncQuery('DELETE FROM Users where userID = ?', [
+    id.userID,
+  ]);
 
-  console.log('id: ', id);
+  return data;
 };
 
 const getUserForAuthentication = async (email) => {

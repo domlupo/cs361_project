@@ -22,7 +22,7 @@ export default function UserListItem({ user: propUser }) {
     const userLevelID = getIDfromRole(updatedUserRole.toLowerCase());
 
     API.instance
-      .put(`/user/delete/${user.userID}/level`, { userLevelID })
+      .put(`/user/${user.userID}/level`, { userLevelID })
       .then((res) => {
         console.log(res);
         setUser(res.data);
