@@ -1,7 +1,6 @@
 import React, { Component, useState } from 'react';
 import {
   Button,
-  Form,
   Container,
   Row,
   Col,
@@ -10,7 +9,6 @@ import {
   FormControl,
 } from 'react-bootstrap';
 import API from '../../apis/API';
-// import { getIDfromRole, validRole } from '../shared/userRoleHelpers';
 import Header, { HeaderPadding } from '../Navigation/Header';
 import '../Auth/Sign.css';
 

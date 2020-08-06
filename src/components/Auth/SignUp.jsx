@@ -1,11 +1,5 @@
 import React, { Component, useState } from 'react';
-import {
-  Button,
-  Form,
-  FormLabel,
-  FormGroup,
-  FormControl,
-} from 'react-bootstrap';
+import { Button, FormLabel, FormGroup, FormControl } from 'react-bootstrap';
 import './Sign.css';
 
 export default function SignUp() {

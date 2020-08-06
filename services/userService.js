@@ -33,7 +33,6 @@ const create = async (req, res, next) => {
 
   const userLevels = await userLevelModel.getAll();
 
-  // validation of schema for necessary fields
   const schema = yup.object().shape({
     email: yup.string().email().required(),
     password: yup.string().required(),

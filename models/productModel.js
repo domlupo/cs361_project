@@ -31,15 +31,7 @@ const editProductQuantity = async (id, { shelfCount, inventoryCount }) => {
 const createProduct = async (data) => {
   await db.pool.asyncQuery(
     'INSERT INTO Products (code, name, descript, price, expirable, inventoryCount, shelfCount, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW())',
-    [
-      data.code,
-      data.prodName,
-      data.descript,
-      data.price,
-      data.expirable,
-      0, // consider setting data.inventoryCount = 0 and data.shelfCount = 0
-      0, // earlier in flow and passing those
-    ],
+    [data.code, data.prodName, data.descript, data.price, data.expirable, 0, 0],
   );
   const savedProd = await getProductByCode(data.code);
   return savedProd;

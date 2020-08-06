@@ -28,13 +28,12 @@ const getProductById = async (req, res, next) => {
 const create = async (req, res, next) => {
   const newProd = req.body;
 
-  // validation of schema for necessary fields
   const schema = yup.object().shape({
     prodName: yup.string().required(),
-    code: yup.string().required(), 
+    code: yup.string().required(),
     descript: yup.string().required(),
     price: yup.number().required(),
-    expirable: yup.number().required(), 
+    expirable: yup.number().required(),
   });
 
   schema
@@ -83,7 +82,6 @@ const sellProduct = async (req, res, next) => {
     next(e);
   }
 };
-
 
 const restockProduct = async (req, res, next) => {
   let product;
@@ -147,7 +145,6 @@ const purchaseProduct = async (req, res, next) => {
     next(e);
   }
 };
-
 
 module.exports = {
   getProductById,
