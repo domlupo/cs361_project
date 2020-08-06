@@ -9,7 +9,6 @@ const getAll = async (req, res, next) => {
     data = await userModel.getAll();
     res.status(200).send(data);
   } catch (e) {
-    console.log(e);
     next(e);
   }
 };
@@ -20,7 +19,6 @@ const getUserById = async (req, res, next) => {
     data = await userModel.getUserById(req.params.id);
     res.status(200).send(data);
   } catch (e) {
-    console.log(e);
     next(e);
   }
 };
@@ -121,7 +119,6 @@ const getAllLevels = async (req, res, next) => {
     data = await userLevelModel.getAll();
     res.status(200).send(data);
   } catch (e) {
-    console.log(e);
     next(e);
   }
 };
