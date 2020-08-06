@@ -14,6 +14,22 @@ import API from '../../apis/API';
 import Header, { HeaderPadding } from '../Navigation/Header';
 import '../Auth/Sign.css';
 
+function Entry(props) {
+  const { controlID, label, name, type, dataVal, handleChange } = props;
+  return (
+    <FormGroup controlId={controlID} bssize="large">
+      <FormLabel>{label}</FormLabel>
+      <FormControl
+        autoFocus
+        name={name}
+        type={type}
+        value={dataVal}
+        onChange={handleChange}
+      />
+    </FormGroup>
+  );
+}
+
 class ProductInsert extends Component {
   constructor(props) {
     super(props);
@@ -100,6 +116,14 @@ class ProductInsert extends Component {
                       onChange={this.handleChange}
                     />
                   </FormGroup>
+                  <Entry
+                    controlID="prodName"
+                    label="Product Name"
+                    name="prodName"
+                    type="text"
+                    dataVal={prodName}
+                    handleChange={this.handleChange}
+                  />
                   <FormGroup bssize="large">
                     <FormLabel>Product ID Code</FormLabel>
                     <FormControl
