@@ -22,7 +22,7 @@ export default function UserListItem({ user: propUser }) {
     const userLevelID = getIDfromRole(updatedUserRole.toLowerCase());
 
     API.instance
-      .put(`/user/${user.userID}/level`, { userLevelID })
+      .put(`/user/delete/${user.userID}/level`, { userLevelID })
       .then((res) => {
         console.log(res);
         setUser(res.data);
@@ -34,11 +34,22 @@ export default function UserListItem({ user: propUser }) {
       });
   };
 
+  const deleteUser = (e) => {
+    API.instance
+      .delete(`/user/${user.userID}`)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        setError(err?.response?.data?.error ?? 'Delete failed!');
+      });
+  };
+
   const onModalClick = () => {
     if (modal === CHANGE_ROLE) {
       changeRole(newUserRole);
     } else if (modal === REMOVE) {
-      // Lifang TODO
+      deleteUser();
     }
   };
 
@@ -81,7 +92,23 @@ export default function UserListItem({ user: propUser }) {
     }
 
     if (modal === 'REMOVE') {
-      // Lifang TODO
+      return (
+        <Modal show={!!modal} onHide={() => setModal('')} centered>
+          <Modal.Header closeButton>
+            <Modal.Title>
+              Delete {capitalize(user.firstName)}{' '}
+              {capitalize(`${user.lastName}`)} from User List
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            Are you sure you wanna delete {capitalize(user.firstName)}{' '}
+            {capitalize(`${user.lastName}`)} ?
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={onModalClick}>Yes</Button>
+          </Modal.Footer>
+        </Modal>
+      );
     }
   };
 

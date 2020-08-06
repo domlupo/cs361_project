@@ -14,5 +14,10 @@ userRouter.put(
 );
 userRouter.post('/login', authService.login, userService.login);
 userRouter.post('/create', authService.create, userService.create);
+userRouter.delete(
+  '/:id',
+  [authService.jwt, authService.managementOnly],
+  userService.deleteUser,
+);
 
 module.exports = userRouter;

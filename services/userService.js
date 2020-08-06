@@ -115,6 +115,18 @@ const editUserLevel = async (req, res, next) => {
     });
 };
 
+const deleteUser = async (req, res, next) => {
+  const userID = req.params.id;
+  let data;
+  try {
+    data = await userModel.deleteUserFromDB({ userID });
+    res.status(200).send(data);
+  } catch (e) {
+    console.log(e);
+    next(e);
+  }
+};
+
 const getAllLevels = async (req, res, next) => {
   let data;
   try {
@@ -133,4 +145,5 @@ module.exports = {
   login,
   editUserLevel,
   getAllLevels,
+  deleteUser,
 };

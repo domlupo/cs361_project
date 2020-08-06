@@ -25,6 +25,12 @@ const getUserById = async (id) => {
   return user;
 };
 
+const deleteUserFromDB = async (id) => {
+  await db.pool.asyncQuery('DELETE FROM Users where userID = ?', [id]);
+
+  console.log('id: ', id);
+};
+
 const getUserForAuthentication = async (email) => {
   // ONLY use for authentication - password is present
   const data = await db.pool.asyncQuery('SELECT * FROM Users WHERE email = ?', [
@@ -62,4 +68,5 @@ module.exports = {
   getUserForAuthentication,
   updateUser,
   createUser,
+  deleteUserFromDB,
 };
