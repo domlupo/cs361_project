@@ -14,13 +14,13 @@ import API from '../../apis/API';
 import Header, { HeaderPadding } from '../Navigation/Header';
 import '../Auth/Sign.css';
 
-function Entry(props) {
-  const { controlID, label, name, type, dataVal, handleChange } = props;
+function InputBox(props) {
+  const { label, name, type, dataVal, handleChange } = props;
+
   return (
-    <FormGroup controlId={controlID} bssize="large">
+    <FormGroup controlId={name} bssize="large">
       <FormLabel>{label}</FormLabel>
       <FormControl
-        autoFocus
         name={name}
         type={type}
         value={dataVal}
@@ -106,18 +106,7 @@ class ProductInsert extends Component {
             <Col>
               <div className="SignIn">
                 <form className="SignInForm" onSubmit={this.handleSubmit}>
-                  <FormGroup controlId="prodName" bssize="large">
-                    <FormLabel>Product Name</FormLabel>
-                    <FormControl
-                      autoFocus
-                      name="prodName"
-                      type="text"
-                      value={prodName}
-                      onChange={this.handleChange}
-                    />
-                  </FormGroup>
-                  <Entry
-                    controlID="prodName"
+                  <InputBox
                     label="Product Name"
                     name="prodName"
                     type="text"
