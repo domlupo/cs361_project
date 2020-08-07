@@ -21,6 +21,11 @@ productRouter.put(
   [authService.jwt, authService.buyerOnly],
   productService.purchaseProduct,
 );
+productRouter.put(
+  '/:id/notification',
+  [authService.jwt, authService.buyerOnly],
+  productService.editProductNotificationCount,
+);
 
 productRouter.post(
   '/create',

@@ -26,6 +26,7 @@ class ProductInsert extends Component {
       expirable: '',
       successMessage: '',
       errorMessage: '',
+      notificationCount: 10,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -42,7 +43,14 @@ class ProductInsert extends Component {
   }
 
   handleSubmit(e) {
-    const { prodName, code, descript, price, expirable } = this.state;
+    const {
+      prodName,
+      code,
+      descript,
+      price,
+      expirable,
+      notificationCount,
+    } = this.state;
 
     API.instance
       .post(`/product/create`, {
@@ -51,6 +59,7 @@ class ProductInsert extends Component {
         descript,
         price,
         expirable,
+        notificationCount,
       })
       .then(() => {
         this.setState({
@@ -78,6 +87,7 @@ class ProductInsert extends Component {
       expirable,
       successMessage,
       errorMessage,
+      notificationCount,
     } = this.state;
 
     return (
@@ -136,6 +146,19 @@ class ProductInsert extends Component {
                       name="expirable"
                       type="text"
                       value={expirable}
+                      onChange={this.handleChange}
+                    />
+                  </FormGroup>
+                  <FormGroup bssize="large">
+                    <FormLabel>
+                      Notification Count
+                      <br />
+                      Low stock threshold for shelf count
+                    </FormLabel>
+                    <FormControl
+                      name="notificationCount"
+                      type="number"
+                      value={notificationCount}
                       onChange={this.handleChange}
                     />
                   </FormGroup>
