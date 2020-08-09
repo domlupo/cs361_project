@@ -28,7 +28,6 @@ const getProductById = async (req, res, next) => {
 const create = async (req, res, next) => {
   const newProd = req.body;
 
-  // validation of schema for necessary fields
   const schema = yup.object().shape({
     prodName: yup.string().required(),
     code: yup.string().required(),

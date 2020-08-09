@@ -43,7 +43,6 @@ class UsersInsert extends Component {
   handleSubmit(e) {
     const { firstName, lastName, email, password, userRole } = this.state;
 
-    // check if valid role inputted
     if (!validRole(userRole)) {
       this.setState({
         successMessage: null,

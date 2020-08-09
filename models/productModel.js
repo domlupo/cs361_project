@@ -38,6 +38,8 @@ const editProductNotificationCount = async (id, { notificationCount }) => {
 
 const createProduct = async (data) => {
   await db.pool.asyncQuery(
+    'INSERT INTO Products (code, name, descript, price, expirable, inventoryCount, shelfCount, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW())',
+    [data.code, data.prodName, data.descript, data.price, data.expirable, 0, 0],
     'INSERT INTO Products (code, name, descript, price, expirable, inventoryCount, shelfCount, notificationCount, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())',
     [
       data.code,
