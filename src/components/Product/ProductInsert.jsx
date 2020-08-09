@@ -154,6 +154,7 @@ class ProductInsert extends Component {
                     />
                   </FormGroup>
 
+
                   <Button onClick={this.handleSubmit}>Submit</Button>
                   {successMessage && (
                     <p className="text-success">{successMessage}</p>
