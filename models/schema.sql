@@ -35,7 +35,8 @@ CREATE TABLE Products(
     updatedAt DATETIME NOT NULL,
     unique (code),
     inventoryCount INT NOT NULL,
-    shelfCount INT NOT NULL
+    shelfCount INT NOT NULL,
+    notificationCount INT NOT NULL DEFAULT 10
 );
 
 DROP TABLE IF EXISTS Transactions;

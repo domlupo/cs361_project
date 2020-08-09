@@ -28,10 +28,29 @@ const editProductQuantity = async (id, { shelfCount, inventoryCount }) => {
   return getProductById(id);
 };
 
+const editProductNotificationCount = async (id, { notificationCount }) => {
+  await db.pool.asyncQuery(
+    'UPDATE Products SET notificationCount = ? WHERE productID = ?',
+    [notificationCount, id],
+  );
+  return getProductById(id);
+};
+
 const createProduct = async (data) => {
   await db.pool.asyncQuery(
     'INSERT INTO Products (code, name, descript, price, expirable, inventoryCount, shelfCount, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW())',
     [data.code, data.prodName, data.descript, data.price, data.expirable, 0, 0],
+    'INSERT INTO Products (code, name, descript, price, expirable, inventoryCount, shelfCount, notificationCount, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())',
+    [
+      data.code,
+      data.prodName,
+      data.descript,
+      data.price,
+      data.expirable,
+      data.notificationCount,
+      0, // consider setting data.inventoryCount = 0 and data.shelfCount = 0
+      0, // earlier in flow and passing those
+    ],
   );
   const savedProd = await getProductByCode(data.code);
   return savedProd;
@@ -41,5 +60,6 @@ module.exports = {
   getAll,
   getProductById,
   editProductQuantity,
+  editProductNotificationCount,
   createProduct,
 };
