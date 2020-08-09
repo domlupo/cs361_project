@@ -140,55 +140,6 @@ class ProductInsert extends Component {
                     handleChange={this.handleChange}
                   />
 
-                  <FormGroup controlId="prodName" bssize="large">
-                    <FormLabel>Product Name</FormLabel>
-                    <FormControl
-                      autoFocus
-                      name="prodName"
-                      type="text"
-                      value={prodName}
-                      onChange={this.handleChange}
-                    />
-                  </FormGroup>
-                  <FormGroup bssize="large">
-                    <FormLabel>Product ID Code</FormLabel>
-                    <FormControl
-                      name="code"
-                      type="text"
-                      value={code}
-                      onChange={this.handleChange}
-                    />
-                  </FormGroup>
-                  <FormGroup controlId="descript" bssize="large">
-                    <FormLabel>Description</FormLabel>
-                    <FormControl
-                      name="descript"
-                      type="text"
-                      value={descript}
-                      onChange={this.handleChange}
-                    />
-                  </FormGroup>
-                  <FormGroup bssize="large">
-                    <FormLabel>Price in $</FormLabel>
-                    <FormControl
-                      name="price"
-                      type="number"
-                      value={price}
-                      onChange={this.handleChange}
-                    />
-                  </FormGroup>
-                  <FormGroup bssize="large">
-                    <FormLabel>
-                      Product Expirable? <br />
-                      Enter 1 for Yes, and 0 for No
-                    </FormLabel>
-                    <FormControl
-                      name="expirable"
-                      type="text"
-                      value={expirable}
-                      onChange={this.handleChange}
-                    />
-                  </FormGroup>
                   <FormGroup bssize="large">
                     <FormLabel>
                       Notification Count
