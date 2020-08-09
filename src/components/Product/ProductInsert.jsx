@@ -1,15 +1,14 @@
 import React, { Component, useState } from 'react';
 import {
+  FormLabel,
+  FormGroup,
+  FormControl,
   Button,
   Container,
   Row,
   Col,
-  FormLabel,
-  FormGroup,
-  FormControl,
 } from 'react-bootstrap';
-import API from '../../apis/API';
-import { Button, Container, Row, Col } from 'react-bootstrap';
+
 import API from '../../apis/API';
 import InputBox from '../shared/entryFormHelpers';
 import Header, { HeaderPadding } from '../Navigation/Header';
@@ -101,7 +100,6 @@ class ProductInsert extends Component {
             <Col>
               <div className="SignIn">
                 <form className="SignInForm" onSubmit={this.handleSubmit}>
-
                   <InputBox
                     label="Product Name"
                     name="prodName"
