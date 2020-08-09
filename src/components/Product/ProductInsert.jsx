@@ -17,6 +17,7 @@ class ProductInsert extends Component {
       expirable: '',
       successMessage: '',
       errorMessage: '',
+      notificationCount: 10,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -33,7 +34,14 @@ class ProductInsert extends Component {
   }
 
   handleSubmit(e) {
-    const { prodName, code, descript, price, expirable } = this.state;
+    const {
+      prodName,
+      code,
+      descript,
+      price,
+      expirable,
+      notificationCount,
+    } = this.state;
 
     API.instance
       .post(`/product/create`, {
@@ -42,6 +50,7 @@ class ProductInsert extends Component {
         descript,
         price,
         expirable,
+        notificationCount,
       })
       .then(() => {
         this.setState({
@@ -69,6 +78,7 @@ class ProductInsert extends Component {
       expirable,
       successMessage,
       errorMessage,
+      notificationCount,
     } = this.state;
 
     return (
@@ -81,6 +91,7 @@ class ProductInsert extends Component {
             <Col>
               <div className="SignIn">
                 <form className="SignInForm" onSubmit={this.handleSubmit}>
+
                   <InputBox
                     label="Product Name"
                     name="prodName"
@@ -120,6 +131,69 @@ class ProductInsert extends Component {
                     dataVal={expirable}
                     handleChange={this.handleChange}
                   />
+
+                  <FormGroup controlId="prodName" bssize="large">
+                    <FormLabel>Product Name</FormLabel>
+                    <FormControl
+                      autoFocus
+                      name="prodName"
+                      type="text"
+                      value={prodName}
+                      onChange={this.handleChange}
+                    />
+                  </FormGroup>
+                  <FormGroup bssize="large">
+                    <FormLabel>Product ID Code</FormLabel>
+                    <FormControl
+                      name="code"
+                      type="text"
+                      value={code}
+                      onChange={this.handleChange}
+                    />
+                  </FormGroup>
+                  <FormGroup controlId="descript" bssize="large">
+                    <FormLabel>Description</FormLabel>
+                    <FormControl
+                      name="descript"
+                      type="text"
+                      value={descript}
+                      onChange={this.handleChange}
+                    />
+                  </FormGroup>
+                  <FormGroup bssize="large">
+                    <FormLabel>Price in $</FormLabel>
+                    <FormControl
+                      name="price"
+                      type="number"
+                      value={price}
+                      onChange={this.handleChange}
+                    />
+                  </FormGroup>
+                  <FormGroup bssize="large">
+                    <FormLabel>
+                      Product Expirable? <br />
+                      Enter 1 for Yes, and 0 for No
+                    </FormLabel>
+                    <FormControl
+                      name="expirable"
+                      type="text"
+                      value={expirable}
+                      onChange={this.handleChange}
+                    />
+                  </FormGroup>
+                  <FormGroup bssize="large">
+                    <FormLabel>
+                      Notification Count
+                      <br />
+                      Low stock threshold for shelf count
+                    </FormLabel>
+                    <FormControl
+                      name="notificationCount"
+                      type="number"
+                      value={notificationCount}
+                      onChange={this.handleChange}
+                    />
+                  </FormGroup>
 
                   <Button onClick={this.handleSubmit}>Submit</Button>
                   {successMessage && (

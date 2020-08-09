@@ -5,7 +5,7 @@ const userService = require('../services/userService');
 const userRouter = express.Router();
 
 userRouter.get('/', authService.jwt, userService.getAll);
-userRouter.get('/level', authService.create, userService.getAllLevels);
+userRouter.get('/level', authService.jwt, userService.getAllLevels);
 userRouter.get('/:id', authService.jwt, userService.getUserById);
 userRouter.put(
   '/:id/level',
