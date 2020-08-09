@@ -140,6 +140,21 @@ class ProductInsert extends Component {
                     handleChange={this.handleChange}
                   />
 
+                  <FormGroup bssize="large">
+                    <FormLabel>
+                      Notification Count
+                      <br />
+                      Low stock threshold for shelf count
+                    </FormLabel>
+                    <FormControl
+                      name="notificationCount"
+                      type="number"
+                      value={notificationCount}
+                      onChange={this.handleChange}
+                    />
+                  </FormGroup>
+
+
                   <Button onClick={this.handleSubmit}>Submit</Button>
                   {successMessage && (
                     <p className="text-success">{successMessage}</p>
