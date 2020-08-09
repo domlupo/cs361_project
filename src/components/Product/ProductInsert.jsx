@@ -104,7 +104,7 @@ class ProductInsert extends Component {
                     label="Product Name"
                     name="prodName"
                     type="text"
-                    dataVal={prodName}
+                    data={prodName}
                     handleChange={this.handleChange}
                   />
 
@@ -112,7 +112,7 @@ class ProductInsert extends Component {
                     label="Product ID Code"
                     name="code"
                     type="text"
-                    dataVal={code}
+                    data={code}
                     handleChange={this.handleChange}
                   />
 
@@ -120,7 +120,7 @@ class ProductInsert extends Component {
                     label="Description"
                     name="descript"
                     type="text"
-                    dataVal={descript}
+                    data={descript}
                     handleChange={this.handleChange}
                   />
 
@@ -128,7 +128,7 @@ class ProductInsert extends Component {
                     label="Price in $"
                     name="price"
                     type="number"
-                    dataVal={price}
+                    data={price}
                     handleChange={this.handleChange}
                   />
 
@@ -136,7 +136,7 @@ class ProductInsert extends Component {
                     label="Does this product have an expiration date? Enter 1 for Yes, and enter 0 for No"
                     name="expirable"
                     type="text"
-                    dataVal={expirable}
+                    data={expirable}
                     handleChange={this.handleChange}
                   />
 
@@ -153,7 +153,6 @@ class ProductInsert extends Component {
                       onChange={this.handleChange}
                     />
                   </FormGroup>
-
 
                   <Button onClick={this.handleSubmit}>Submit</Button>
                   {successMessage && (

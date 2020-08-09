@@ -2,7 +2,7 @@ import React from 'react';
 import { FormLabel, FormGroup, FormControl } from 'react-bootstrap';
 
 function InputBox(props) {
-  const { label, name, type, dataVal, handleChange } = props;
+  const { label, name, type, value, handleChange } = props;
 
   return (
     <FormGroup controlId={name} bssize="large">
@@ -10,7 +10,7 @@ function InputBox(props) {
       <FormControl
         name={name}
         type={type}
-        value={dataVal}
+        value={value}
         onChange={handleChange}
       />
     </FormGroup>
