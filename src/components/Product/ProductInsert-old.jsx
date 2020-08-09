@@ -1,7 +1,16 @@
 import React, { Component, useState } from 'react';
-import { Button, Container, Row, Col } from 'react-bootstrap';
+import {
+  Button,
+  Form,
+  Container,
+  Row,
+  Col,
+  FormLabel,
+  FormGroup,
+  FormControl,
+} from 'react-bootstrap';
 import API from '../../apis/API';
-import InputBox from '../shared/entryFormHelpers';
+// import { getIDfromRole, validRole } from '../shared/userRoleHelpers';
 import Header, { HeaderPadding } from '../Navigation/Header';
 import '../Auth/Sign.css';
 
@@ -17,7 +26,6 @@ class ProductInsert extends Component {
       expirable: '',
       successMessage: '',
       errorMessage: '',
-      notificationCount: 10,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -34,14 +42,7 @@ class ProductInsert extends Component {
   }
 
   handleSubmit(e) {
-    const {
-      prodName,
-      code,
-      descript,
-      price,
-      expirable,
-      notificationCount,
-    } = this.state;
+    const { prodName, code, descript, price, expirable } = this.state;
 
     API.instance
       .post(`/product/create`, {
@@ -50,7 +51,6 @@ class ProductInsert extends Component {
         descript,
         price,
         expirable,
-        notificationCount,
       })
       .then(() => {
         this.setState({
@@ -78,7 +78,6 @@ class ProductInsert extends Component {
       expirable,
       successMessage,
       errorMessage,
-      notificationCount,
     } = this.state;
 
     return (
@@ -91,47 +90,6 @@ class ProductInsert extends Component {
             <Col>
               <div className="SignIn">
                 <form className="SignInForm" onSubmit={this.handleSubmit}>
-
-                  <InputBox
-                    label="Product Name"
-                    name="prodName"
-                    type="text"
-                    dataVal={prodName}
-                    handleChange={this.handleChange}
-                  />
-
-                  <InputBox
-                    label="Product ID Code"
-                    name="code"
-                    type="text"
-                    dataVal={code}
-                    handleChange={this.handleChange}
-                  />
-
-                  <InputBox
-                    label="Description"
-                    name="descript"
-                    type="text"
-                    dataVal={descript}
-                    handleChange={this.handleChange}
-                  />
-
-                  <InputBox
-                    label="Price in $"
-                    name="price"
-                    type="number"
-                    dataVal={price}
-                    handleChange={this.handleChange}
-                  />
-
-                  <InputBox
-                    label="Does this product have an expiration date? Enter 1 for Yes, and enter 0 for No"
-                    name="expirable"
-                    type="text"
-                    dataVal={expirable}
-                    handleChange={this.handleChange}
-                  />
-
                   <FormGroup controlId="prodName" bssize="large">
                     <FormLabel>Product Name</FormLabel>
                     <FormControl
@@ -181,20 +139,6 @@ class ProductInsert extends Component {
                       onChange={this.handleChange}
                     />
                   </FormGroup>
-                  <FormGroup bssize="large">
-                    <FormLabel>
-                      Notification Count
-                      <br />
-                      Low stock threshold for shelf count
-                    </FormLabel>
-                    <FormControl
-                      name="notificationCount"
-                      type="number"
-                      value={notificationCount}
-                      onChange={this.handleChange}
-                    />
-                  </FormGroup>
-
                   <Button onClick={this.handleSubmit}>Submit</Button>
                   {successMessage && (
                     <p className="text-success">{successMessage}</p>
