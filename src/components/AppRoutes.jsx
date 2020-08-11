@@ -1,7 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import About from './About/About';
 import SignIn from './Auth/SignIn';
 import SignUp from './Auth/SignUp';
 import Product from './Product/ProductList';
@@ -17,7 +16,6 @@ export default function AppRoutes() {
     <Navigation>
       <Switch>
         <Route path="/signin" component={SignIn} />
-        <Route path="/about" component={About} />
         <Route path="/signup" component={SignUp} />
         <Route path="/transactions" component={TransactionList} />
         <Route path="/product-insert" component={ProductInsert} />
