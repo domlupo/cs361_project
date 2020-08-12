@@ -42,6 +42,16 @@ const updateUser = async (id, data) => {
   return getUserById(id);
 };
 
+const deleteUser = async (id, data) => {
+  const now = moment().format(constants.dateFormat);
+
+  await db.pool.asyncQuery(
+    'UPDATE Users SET userLevelID=0,email=NULL,firstName=NULL,lastName=NULL WHERE Users.userID = ?',
+    [id],
+  );
+  return getUserById(id);
+};
+
 const createUser = async (data) => {
   await db.pool.asyncQuery(
     'INSERT INTO Users (userLevelID, email, password, firstName, lastName, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, NOW(), NOW())',
@@ -62,4 +72,5 @@ module.exports = {
   getUserForAuthentication,
   updateUser,
   createUser,
+  deleteUser,
 };

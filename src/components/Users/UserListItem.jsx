@@ -34,11 +34,25 @@ export default function UserListItem({ user: propUser }) {
       });
   };
 
+  const deleteUser = () => {
+    API.instance
+      .put(`/user/${user.userID}/delete`)
+      .then((res) => {
+        console.log(res);
+        setUser(res.data);
+        setNewUserRole('');
+        setModal('');
+      })
+      .catch((err) => {
+        setError(err?.response?.data?.error ?? 'Delete user failed!');
+      });
+  };
+
   const onModalClick = () => {
     if (modal === CHANGE_ROLE) {
       changeRole(newUserRole);
     } else if (modal === REMOVE) {
-      // Lifang TODO
+      deleteUser(newUserRole);
     }
   };
 
@@ -81,7 +95,28 @@ export default function UserListItem({ user: propUser }) {
     }
 
     if (modal === 'REMOVE') {
-      // Lifang TODO
+      return (
+        <Modal show={!!modal} onHide={() => setModal('')} centered>
+          <Modal.Header closeButton>
+            <Modal.Title>
+              Delete {capitalize(user.firstName)}{' '}
+              {capitalize(`${user.lastName}`)} from User List
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            Are you sure you wanna delete {capitalize(user.firstName)}{' '}
+            {capitalize(`${user.lastName}`)} ?
+            <Form>
+              <Form.Label>Replace User with NULL</Form.Label>
+              <Form.Control as="select" />
+            </Form>
+          </Modal.Body>
+
+          <Modal.Footer>
+            <Button onClick={onModalClick}>Confirm</Button>
+          </Modal.Footer>
+        </Modal>
+      );
     }
   };
 

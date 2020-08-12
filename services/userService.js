@@ -78,6 +78,12 @@ const login = async (req, res, next) => {
   });
 };
 
+const delUser = async (req, res, next) => {
+  const userID = req.params.id;
+
+  await userModel.deleteUser(userID);
+};
+
 const editUserLevel = async (req, res, next) => {
   const userID = req.params.id;
   const { userLevelID: newUserLevelID } = req.body;
@@ -129,4 +135,5 @@ module.exports = {
   login,
   editUserLevel,
   getAllLevels,
+  delUser,
 };

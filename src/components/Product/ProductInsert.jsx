@@ -104,7 +104,7 @@ class ProductInsert extends Component {
                     label="Product Name"
                     name="prodName"
                     type="text"
-                    data={prodName}
+                    value={prodName}
                     handleChange={this.handleChange}
                   />
 
@@ -112,7 +112,7 @@ class ProductInsert extends Component {
                     label="Product ID Code"
                     name="code"
                     type="text"
-                    data={code}
+                    value={code}
                     handleChange={this.handleChange}
                   />
 
@@ -120,7 +120,7 @@ class ProductInsert extends Component {
                     label="Description"
                     name="descript"
                     type="text"
-                    data={descript}
+                    value={descript}
                     handleChange={this.handleChange}
                   />
 
@@ -128,7 +128,7 @@ class ProductInsert extends Component {
                     label="Price in $"
                     name="price"
                     type="number"
-                    data={price}
+                    value={price}
                     handleChange={this.handleChange}
                   />
 
@@ -136,7 +136,7 @@ class ProductInsert extends Component {
                     label="Does this product have an expiration date? Enter 1 for Yes, and enter 0 for No"
                     name="expirable"
                     type="text"
-                    data={expirable}
+                    value={expirable}
                     handleChange={this.handleChange}
                   />
 
