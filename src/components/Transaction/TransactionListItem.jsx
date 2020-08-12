@@ -4,7 +4,7 @@ import { Card, CardGroup } from 'react-bootstrap';
 import { capitalize } from 'lodash';
 
 export default function TransactionListItem({ transaction: propTransaction }) {
-  const [transaction, setTransaction] = useState(propTransaction);
+  const [transaction] = useState(propTransaction);
 
   return (
     <CardGroup className="TransactionListItem">
