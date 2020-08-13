@@ -34,11 +34,27 @@ export default function UserListItem({ user: propUser }) {
       });
   };
 
+  const deleteUser = (updatedUserRole) => {
+    const userLevelID = getIDfromRole(updatedUserRole.toLowerCase());
+    API.instance
+      .put(`/user/${user.userID}/delete`, { userLevelID })
+      .then((res) => {
+        console.log(res);
+        setUser(res.data);
+        setNewUserRole('');
+        setNewUserRole('');
+        setModal('');
+      })
+      .catch((err) => {
+        setError(err?.response?.data?.error ?? 'Delete user failed!');
+      });
+  };
+
   const onModalClick = () => {
     if (modal === CHANGE_ROLE) {
       changeRole(newUserRole);
     } else if (modal === REMOVE) {
-      // Lifang TODO
+      deleteUser(newUserRole);
     }
   };
 
@@ -82,7 +98,41 @@ export default function UserListItem({ user: propUser }) {
     }
 
     if (modal === 'REMOVE') {
-      // Lifang TODO
+      return (
+        <Modal show={!!modal} onHide={() => setModal('')} centered>
+          <Modal.Header closeButton>
+            <Modal.Title>
+              Remove {capitalize(user.firstName)}{' '}
+              {capitalize(`${user.lastName}`)} From User List, Change to owner
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form>
+              <Form.Label>
+                Are you sure you wanna delete {capitalize(user.firstName)}{' '}
+                {capitalize(`${user.lastName}`)} ?
+              </Form.Label>
+              <Form.Control
+                as="select"
+                value={newUserRole}
+                onChange={(e) => setNewUserRole(e.target.value)}
+              >
+                <option />
+                <option>Owner</option>
+              </Form.Control>
+              <Form.Text className="text-danger" type="invalid">
+                {error}
+              </Form.Text>
+            </Form>
+          </Modal.Body>
+
+          <Modal.Footer>
+            <Button disabled={newUserRole === ''} onClick={onModalClick}>
+              Confirm
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      );
     }
   };
 
