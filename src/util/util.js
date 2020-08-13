@@ -2,6 +2,10 @@ export const isDevelopment = () => {
   return process.env.NODE_ENV === 'development';
 };
 
+export const isOwner = (user) => {
+  return user.userLevelID === parseInt(process.env.REACT_APP_DB_OWNER_ID, 10);
+};
+
 export const isManagement = (user) => {
   return (
     user.userLevelID === parseInt(process.env.REACT_APP_DB_OWNER_ID, 10) ||
