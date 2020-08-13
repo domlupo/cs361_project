@@ -44,11 +44,11 @@ const updateUser = async (id, data) => {
 
 const deleteUser = async (id, data) => {
   const now = moment().format(constants.dateFormat);
-
   await db.pool.asyncQuery(
-    'UPDATE Users SET userLevelID=0,email=NULL,firstName=NULL,lastName=NULL WHERE Users.userID = ?',
-    [id],
+    'UPDATE Users SET userLevelID = ?, password = ?, email = ?, firstName = ?, lastName = ?, updatedAt = ? WHERE Users.userID = ?',
+    [data.userLevelID, ' ', ' ', 'NULL', 'NULL', now, id],
   );
+
   return getUserById(id);
 };
 

@@ -34,12 +34,14 @@ export default function UserListItem({ user: propUser }) {
       });
   };
 
-  const deleteUser = () => {
+  const deleteUser = (updatedUserRole) => {
+    const userLevelID = getIDfromRole(updatedUserRole.toLowerCase());
     API.instance
-      .put(`/user/${user.userID}/delete`)
+      .put(`/user/${user.userID}/delete`, { userLevelID })
       .then((res) => {
         console.log(res);
         setUser(res.data);
+        setNewUserRole('');
         setNewUserRole('');
         setModal('');
       })
@@ -99,21 +101,34 @@ export default function UserListItem({ user: propUser }) {
         <Modal show={!!modal} onHide={() => setModal('')} centered>
           <Modal.Header closeButton>
             <Modal.Title>
-              Delete {capitalize(user.firstName)}{' '}
-              {capitalize(`${user.lastName}`)} from User List
+              Remove {capitalize(user.firstName)}{' '}
+              {capitalize(`${user.lastName}`)} From User List, Change to owner
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            Are you sure you wanna delete {capitalize(user.firstName)}{' '}
-            {capitalize(`${user.lastName}`)} ?
             <Form>
-              <Form.Label>Replace User with NULL</Form.Label>
-              <Form.Control as="select" />
+              <Form.Label>
+                Are you sure you wanna delete {capitalize(user.firstName)}{' '}
+                {capitalize(`${user.lastName}`)} ?
+              </Form.Label>
+              <Form.Control
+                as="select"
+                value={newUserRole}
+                onChange={(e) => setNewUserRole(e.target.value)}
+              >
+                <option />
+                <option>Owner</option>
+              </Form.Control>
+              <Form.Text className="text-danger" type="invalid">
+                {error}
+              </Form.Text>
             </Form>
           </Modal.Body>
 
           <Modal.Footer>
-            <Button onClick={onModalClick}>Confirm</Button>
+            <Button disabled={newUserRole === ''} onClick={onModalClick}>
+              Confirm
+            </Button>
           </Modal.Footer>
         </Modal>
       );

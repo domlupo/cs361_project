@@ -78,12 +78,6 @@ const login = async (req, res, next) => {
   });
 };
 
-const delUser = async (req, res, next) => {
-  const userID = req.params.id;
-
-  await userModel.deleteUser(userID);
-};
-
 const editUserLevel = async (req, res, next) => {
   const userID = req.params.id;
   const { userLevelID: newUserLevelID } = req.body;
@@ -118,6 +112,33 @@ const editUserLevel = async (req, res, next) => {
     });
 };
 
+const deleteUserFromDB = async (req, res, next) => {
+  const userID = req.params.id;
+  const { userLevelID: newUserLevelID } = req.body;
+  const { userLevel } = res.locals;
+  const user = await userModel.getUserById(userID);
+
+  const userLevels = await userLevelModel.getAll();
+  const schema = yup
+    .number()
+    .oneOf(userLevels.map((userLevelInner) => userLevelInner.userLevelID))
+    .required();
+
+  schema
+    .validate(newUserLevelID)
+    .then(async (validatedUserLevelID) => {
+      const updatedUser = await userModel.deleteUser(userID, {
+        ...user,
+        userLevelID: validatedUserLevelID,
+      });
+      res.status(200).send(updatedUser);
+    })
+    .catch((error) => {
+      res.status(400);
+      res.send(error);
+    });
+};
+
 const getAllLevels = async (req, res, next) => {
   let data;
   try {
@@ -135,5 +156,5 @@ module.exports = {
   login,
   editUserLevel,
   getAllLevels,
-  delUser,
+  deleteUserFromDB,
 };
