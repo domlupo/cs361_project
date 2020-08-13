@@ -12,7 +12,9 @@ const checkUser = (validationFunction) => async (req, res, next) => {
   const { user } = res.locals;
   if (!user) {
     res.status(403);
-    res.send({ message: 'Unauthorized' });
+    res.send({
+      message: 'Unauthorized: your login level does not allow this operation.',
+    });
   } else {
     const userLevel = await userLevelModel.getUserLevelById(user.userLevelID);
     const valid = validationFunction(userLevel);
@@ -21,7 +23,10 @@ const checkUser = (validationFunction) => async (req, res, next) => {
       next();
     } else {
       res.status(403);
-      res.send({ message: 'Unauthorized' });
+      res.send({
+        message:
+          'Unauthorized: your login level does not allow this operation.',
+      });
     }
   }
 };
