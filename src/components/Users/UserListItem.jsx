@@ -4,7 +4,7 @@ import { Card, CardGroup, Button, Modal, Form } from 'react-bootstrap';
 import { capitalize } from 'lodash';
 import { useSelector } from 'react-redux';
 import API from '../../apis/API';
-import { isManagement } from '../../util/util';
+import { isOwner, isManagement } from '../../util/util';
 import { getIDfromRole, getRoleFromID } from '../shared/userRoleHelpers';
 
 const CHANGE_ROLE = 'CHANGE ROLE';
@@ -62,6 +62,7 @@ export default function UserListItem({ user: propUser }) {
                 onChange={(e) => setNewUserRole(e.target.value)}
               >
                 <option />
+                {isOwner(currentUser) && <option>Owner</option>}
                 <option>Manager</option>
                 <option>Buyer</option>
                 <option>Cashier</option>
