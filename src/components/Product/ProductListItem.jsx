@@ -136,7 +136,7 @@ export default function ProductListItem({ product: propProduct }) {
         <Card.Body>
           <Card.Title>{capitalize(product.name)}</Card.Title>
           <Card.Subtitle>
-            <i>{product.code}</i>
+            <i>Code: {product.code}</i>
           </Card.Subtitle>
           <Card.Text>{capitalize(product.descript)}</Card.Text>
           <Card.Text>
