@@ -9,6 +9,8 @@ import {
   FormGroup,
   FormControl,
 } from 'react-bootstrap';
+
+import ReactTooltip from 'react-tooltip';
 import { connect } from 'react-redux';
 import API from '../../apis/API';
 import { getIDfromRole, validRole } from '../shared/userRoleHelpers';
@@ -161,13 +163,22 @@ class UsersInsert extends Component {
                       <option>Cashier</option>
                     </Form.Control>
                   </FormGroup>
-                  <Button onClick={this.handleSubmit}>Submit</Button>
+                  <Button
+                    data-tip
+                    data-for="submitTip"
+                    onClick={this.handleSubmit}
+                  >
+                    Submit
+                  </Button>
                   {successMessage && (
                     <p className="text-success">{successMessage}</p>
                   )}
                   {errorMessage && (
                     <p className="text-danger">{errorMessage}</p>
                   )}
+                  <ReactTooltip id="submitTip" place="top" effect="solid">
+                    Only an owner or manager can add a new user
+                  </ReactTooltip>
                 </form>
               </div>
             </Col>
