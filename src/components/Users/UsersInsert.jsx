@@ -4,14 +4,18 @@ import {
   Container,
   Row,
   Col,
+  Form,
   FormLabel,
   FormGroup,
   FormControl,
 } from 'react-bootstrap';
+
 import ReactTooltip from 'react-tooltip';
+import { connect } from 'react-redux';
 import API from '../../apis/API';
 import { getIDfromRole, validRole } from '../shared/userRoleHelpers';
 import Header, { HeaderPadding } from '../Navigation/Header';
+import { isOwner } from '../../util/util';
 import '../Auth/Sign.css';
 
 class UsersInsert extends Component {
@@ -30,6 +34,11 @@ class UsersInsert extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  getCurrentUser() {
+    const { currentUser } = this.props;
+    return currentUser;
   }
 
   handleChange(e) {
@@ -91,6 +100,8 @@ class UsersInsert extends Component {
       errorMessage,
     } = this.state;
 
+    const currentUser = this.getCurrentUser();
+
     return (
       <div>
         <Header />
@@ -140,12 +151,17 @@ class UsersInsert extends Component {
                   </FormGroup>
                   <FormGroup bssize="large">
                     <FormLabel>User Role</FormLabel>
-                    <FormControl
-                      name="userRole"
-                      type="text"
+                    <Form.Control
+                      as="select"
                       value={userRole}
                       onChange={this.handleChange}
-                    />
+                    >
+                      <option />
+                      {isOwner(currentUser) && <option>Owner</option>}
+                      <option>Manager</option>
+                      <option>Buyer</option>
+                      <option>Cashier</option>
+                    </Form.Control>
                   </FormGroup>
                   <Button
                     data-tip
@@ -174,4 +190,10 @@ class UsersInsert extends Component {
   }
 }
 
-export default UsersInsert;
+const mapStateToProps = (state) => {
+  return {
+    currentUser: state.user,
+  };
+};
+
+export default connect(mapStateToProps)(UsersInsert);

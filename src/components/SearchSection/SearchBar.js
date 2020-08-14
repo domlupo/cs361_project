@@ -23,7 +23,10 @@ class SearchBar extends React.Component {
     const { term } = this.state;
     const { onInputChange } = this.props;
     return (
-      <Form onSubmit={this.onFormSubmit} style={{ width: '100%' }}>
+      <Form
+        onSubmit={this.onFormSubmit}
+        style={{ width: '100%', paddingRight: '10px' }}
+      >
         <Form.Control
           type="text"
           value={onInputChange ? undefined : term}
