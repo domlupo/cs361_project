@@ -11,7 +11,10 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
+  LineChart,
+  Line,
 } from 'recharts';
+
 import { isDate } from 'moment';
 import API from '../../apis/API'; // library for AJAX functions
 import Header, { HeaderPadding } from '../Navigation/Header';
@@ -46,27 +49,27 @@ function TransactionStats() {
     startDate,
     endDate,
   );
-  console.log(salesInRange);
+
   const incomeByDay = dataUtil.getIncomeByDay(salesInRange);
-  console.log(incomeByDay[0]);
 
   const renderPlot = () => {
     if (loading) return <ReactLoading color="#e26d5c" />;
-    return (
-      <BarChart
-        width={600}
-        height={300}
-        data={salesInRange}
-        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="date" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="price" fill="#8884d8" />
-      </BarChart>
-    );
+    if (incomeByDay.length > 0)
+      return (
+        <div>
+          <LineChart width={600} height={400} data={incomeByDay}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis label="Date" dataKey="date" interval="preserveEnd" />
+            <YAxis label="Income ($)" interval="preserveEnd" />
+            <Line
+              type="monotone"
+              dataKey="income"
+              stroke="#8884d8"
+              activeDot={{ r: 8 }}
+            />
+          </LineChart>
+        </div>
+      );
   };
 
   const dateInputs = () => {
@@ -96,7 +99,7 @@ function TransactionStats() {
     );
   };
 
-  const filteredData = () => {
+  const filteredList = () => {
     if (loading) return <ReactLoading color="#e26d5c" />;
     return (
       <>
@@ -116,7 +119,7 @@ function TransactionStats() {
       <HeaderPadding />
       <div className="SalesPlot">{renderPlot()}</div>
       <div className="DateInputs">{dateInputs()}</div>
-      <div className="FilteredData">{filteredData()}</div>
+      <div className="FilteredData">{filteredList()}</div>
     </div>
   );
 }

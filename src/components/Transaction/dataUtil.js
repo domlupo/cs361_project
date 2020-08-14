@@ -48,27 +48,6 @@ const getIncomeByDay = (sales) => {
   return incomeByDay;
 };
 
-// const getIncomeByDay = (sales) => {
-//   var holder = {};
-//   sales.forEach( (sale) => {
-//     let day = getSimpleDate(sale);
-//     if (holder.hasOwnProperty(day)) {
-//       holder[day] = holder[day] + getNetIncome(sale);
-//     } else {
-//       holder[day] = getNetIncome(sale)
-//     }
-//   });
-
-//   var incomeByDay = [];
-
-//   for (let day in holder) {
-//     incomeByDay.push({date: new Date(day), income: holder[day]});
-//   }
-
-//   return incomeByDay;
-
-// }
-
 module.exports = {
   getSales,
   filterByDate,
