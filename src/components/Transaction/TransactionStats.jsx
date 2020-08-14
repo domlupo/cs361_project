@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ReactLoading from 'react-loading';
 import { FormLabel, FormGroup, FormControl } from 'react-bootstrap';
+// import { getSalesInRange } from './TransactionDataUtil.js';
 
 import {
   BarChart,
@@ -16,6 +17,8 @@ import API from '../../apis/API'; // library for AJAX functions
 import Header, { HeaderPadding } from '../Navigation/Header';
 import TransactionListItem from './TransactionListItem';
 import './Transaction.css';
+
+const dataUtil = require('./dataUtil');
 
 function TransactionStats() {
   const [transactions, setTransactions] = useState([]);
@@ -38,18 +41,17 @@ function TransactionStats() {
     });
   }, []);
 
+  const salesInRange = dataUtil.getSalesInRange(
+    transactions,
+    startDate,
+    endDate,
+  );
+  console.log(salesInRange);
+  const incomeByDay = dataUtil.getIncomeByDay(salesInRange);
+  console.log(incomeByDay[0]);
+
   const renderPlot = () => {
     if (loading) return <ReactLoading color="#e26d5c" />;
-    const sales = transactions.filter((t) => t.endLoc === 'sold');
-    console.log(sales);
-    const salesInRange = sales.filter((s) => {
-      return (
-        new Date(s.date) > new Date(startDate) &&
-        new Date(s.date) <= new Date(endDate)
-      );
-    });
-    console.log(salesInRange.length);
-
     return (
       <BarChart
         width={600}
@@ -94,12 +96,27 @@ function TransactionStats() {
     );
   };
 
+  const filteredData = () => {
+    if (loading) return <ReactLoading color="#e26d5c" />;
+    return (
+      <>
+        {salesInRange.map((transaction) => (
+          <TransactionListItem
+            transaction={transaction}
+            key={transaction.transactionID}
+          />
+        ))}
+      </>
+    );
+  };
+
   return (
     <div className="container">
       <Header />
       <HeaderPadding />
       <div className="SalesPlot">{renderPlot()}</div>
       <div className="DateInputs">{dateInputs()}</div>
+      <div className="FilteredData">{filteredData()}</div>
     </div>
   );
 }
