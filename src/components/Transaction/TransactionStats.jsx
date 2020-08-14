@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ReactLoading from 'react-loading';
 import { FormLabel, FormGroup, FormControl } from 'react-bootstrap';
-// import { getSalesInRange } from './TransactionDataUtil.js';
 
 import {
   BarChart,
