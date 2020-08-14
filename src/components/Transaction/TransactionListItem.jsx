@@ -1,26 +1,36 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Card, CardGroup } from 'react-bootstrap';
 import { capitalize } from 'lodash';
+import API from '../../apis/API';
 
 export default function TransactionListItem({ transaction: propTransaction }) {
   const [transaction] = useState(propTransaction);
+  const [user, setUser] = useState('');
+
+  useEffect(() => {
+    API.instance.get(`/user/${transaction.userID}`).then((res) => {
+      setUser(res.data);
+    });
+  }, []);
 
   return (
     <CardGroup className="TransactionListItem">
       <Card border="light">
         <Card.Body>
-          <Card.Title>UserID: {transaction.userID}</Card.Title>
-          <Card.Text> {transaction.code} </Card.Text>
-          <Card.Text>{capitalize(transaction.name)} </Card.Text>
+          <Card.Title>Transaction ID: {transaction.transactionID} </Card.Title>
+          <Card.Title>
+            User: {capitalize(user.firstName)} {capitalize(user.lastName)}
+          </Card.Title>
+          <Card.Text>Date: {transaction.date.split('T')[0]} </Card.Text>
         </Card.Body>
       </Card>
 
       <Card className="TransactionListItemDetails" border="light">
         <Card.Body>
-          <Card.Text>TransactionID: {transaction.transactionID} </Card.Text>
-          <Card.Text>ProductyQty: {transaction.productQty} </Card.Text>
-          <Card.Text>Date: {transaction.date.split('T')[0]} </Card.Text>
+          <Card.Text>{capitalize(transaction.name)} </Card.Text>
+          <Card.Text>Code: {transaction.code} </Card.Text>
+          <Card.Text>Product Quantity: {transaction.productQty} </Card.Text>
         </Card.Body>
       </Card>
     </CardGroup>
