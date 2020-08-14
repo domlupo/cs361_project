@@ -2,6 +2,14 @@ const getSales = (transactions) => {
   return transactions.filter((t) => t.endLoc === 'sold');
 };
 
+const getPurchases = (transactions) => {
+  return transactions.filter((t) => t.endLoc === 'inventory');
+};
+
+const getRestocks = (transactions) => {
+  return transactions.filter((t) => t.endLoc === 'shelf');
+};
+
 const filterByDate = (transactions, startDate, endDate) => {
   return transactions.filter((t) => {
     return (
@@ -13,6 +21,14 @@ const filterByDate = (transactions, startDate, endDate) => {
 
 const getSalesInRange = (transactions, startDate, endDate) => {
   return filterByDate(getSales(transactions), startDate, endDate);
+};
+
+const getPurchasesInRange = (transactions, startDate, endDate) => {
+  return filterByDate(getPurchases(transactions), startDate, endDate);
+};
+
+const getRestocksInRange = (transactions, startDate, endDate) => {
+  return filterByDate(getRestocks(transactions), startDate, endDate);
 };
 
 const getNetIncome = (sale) => {
@@ -55,4 +71,8 @@ module.exports = {
   getNetIncome,
   addSimpleDate,
   getIncomeByDay,
+  getPurchases,
+  getRestocks,
+  getPurchasesInRange,
+  getRestocksInRange,
 };

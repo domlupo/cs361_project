@@ -51,7 +51,7 @@ export default function Navigation({ children }) {
           to="/transaction-stats"
           activeClassName="NavigationLinkActive"
         >
-          Transaction Analysis
+          Transaction Statistics & Reports
         </NavLink>
 
         <NavLink

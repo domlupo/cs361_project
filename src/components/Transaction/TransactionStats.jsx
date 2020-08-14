@@ -43,6 +43,8 @@ function TransactionStats() {
     });
   }, []);
 
+  console.log(transactions);
+
   const salesInRange = dataUtil.getSalesInRange(
     transactions,
     startDate,
@@ -51,12 +53,24 @@ function TransactionStats() {
 
   const incomeByDay = dataUtil.getIncomeByDay(salesInRange);
 
+  const purchasesInRange = dataUtil.getPurchasesInRange(
+    transactions,
+    startDate,
+    endDate,
+  );
+
+  const restocksInRange = dataUtil.getRestocksInRange(
+    transactions,
+    startDate,
+    endDate,
+  );
+
   const renderPlot = () => {
     if (loading) return <ReactLoading color="#e26d5c" />;
     if (incomeByDay.length > 0)
       return (
         <div>
-          <h3>Net Income vs. Date</h3>
+          <h3>Income vs. Date</h3>
           <LineChart width={600} height={400} data={incomeByDay}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis label="Date" dataKey="date" interval="preserveEnd" />
@@ -99,12 +113,42 @@ function TransactionStats() {
     );
   };
 
-  const filteredList = () => {
+  const filteredSales = () => {
     if (loading) return <ReactLoading color="#e26d5c" />;
     return (
       <>
-        <h3>Transaction List</h3>
+        <h3>Sales Transactions in Date Range</h3>
         {salesInRange.map((transaction) => (
+          <TransactionListItem
+            transaction={transaction}
+            key={transaction.transactionID}
+          />
+        ))}
+      </>
+    );
+  };
+
+  const filteredPurchases = () => {
+    if (loading) return <ReactLoading color="#e26d5c" />;
+    return (
+      <>
+        <h3>Purchase Transactions in Date Range</h3>
+        {purchasesInRange.map((transaction) => (
+          <TransactionListItem
+            transaction={transaction}
+            key={transaction.transactionID}
+          />
+        ))}
+      </>
+    );
+  };
+
+  const filteredRestocks = () => {
+    if (loading) return <ReactLoading color="#e26d5c" />;
+    return (
+      <>
+        <h3>Restock Transactions in Date Range</h3>
+        {restocksInRange.map((transaction) => (
           <TransactionListItem
             transaction={transaction}
             key={transaction.transactionID}
@@ -120,9 +164,9 @@ function TransactionStats() {
       <HeaderPadding />
       <div className="DateInputs">{dateInputs()}</div>
       <div className="SalesPlot">{renderPlot()}</div>
-      <Header />
-      <HeaderPadding />
-      <div className="FilteredData">{filteredList()}</div>
+      <div className="FilteredSales">{filteredSales()}</div>
+      <div className="FilteredPurchases">{filteredPurchases()}</div>
+      <div className="FilteredRestocks">{filteredRestocks()}</div>
     </div>
   );
 }
