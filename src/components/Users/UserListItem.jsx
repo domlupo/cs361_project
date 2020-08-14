@@ -34,18 +34,15 @@ export default function UserListItem({ user: propUser }) {
       });
   };
 
-  const deleteUser = (updatedUserRole) => {
-    const userLevelID = getIDfromRole(updatedUserRole.toLowerCase());
+  const deleteUser = () => {
     API.instance
-      .put(`/user/${user.userID}/delete`, { userLevelID })
+      .delete(`/user/${user.userID}`)
       .then((res) => {
+        window.location.reload();
         console.log(res);
-        setUser(res.data);
-        setNewUserRole('');
-        setNewUserRole('');
-        setModal('');
       })
       .catch((err) => {
+        console.log(err);
         setError(err?.response?.data?.error ?? 'Delete user failed!');
       });
   };
@@ -54,7 +51,7 @@ export default function UserListItem({ user: propUser }) {
     if (modal === CHANGE_ROLE) {
       changeRole(newUserRole);
     } else if (modal === REMOVE) {
-      deleteUser(newUserRole);
+      deleteUser();
     }
   };
 
@@ -102,24 +99,16 @@ export default function UserListItem({ user: propUser }) {
         <Modal show={!!modal} onHide={() => setModal('')} centered>
           <Modal.Header closeButton>
             <Modal.Title>
-              Remove {capitalize(user.firstName)}{' '}
-              {capitalize(`${user.lastName}`)} From User List, Change to owner
+              Remove employee {capitalize(user.firstName)}{' '}
+              {capitalize(`${user.lastName}`)}
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Form>
               <Form.Label>
-                Are you sure you wanna delete {capitalize(user.firstName)}{' '}
-                {capitalize(`${user.lastName}`)} ?
+                Are you sure you wanna remove {capitalize(user.firstName)}{' '}
+                {capitalize(`${user.lastName}`)}?
               </Form.Label>
-              <Form.Control
-                as="select"
-                value={newUserRole}
-                onChange={(e) => setNewUserRole(e.target.value)}
-              >
-                <option />
-                <option>Owner</option>
-              </Form.Control>
               <Form.Text className="text-danger" type="invalid">
                 {error}
               </Form.Text>
@@ -127,9 +116,7 @@ export default function UserListItem({ user: propUser }) {
           </Modal.Body>
 
           <Modal.Footer>
-            <Button disabled={newUserRole === ''} onClick={onModalClick}>
-              Confirm
-            </Button>
+            <Button onClick={onModalClick}>Confirm</Button>
           </Modal.Footer>
         </Modal>
       );

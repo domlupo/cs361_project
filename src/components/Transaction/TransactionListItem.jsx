@@ -19,9 +19,12 @@ export default function TransactionListItem({ transaction: propTransaction }) {
       <Card border="light">
         <Card.Body>
           <Card.Title>Transaction ID: {transaction.transactionID} </Card.Title>
-          <Card.Title>
-            User: {capitalize(user.firstName)} {capitalize(user.lastName)}
-          </Card.Title>
+          {user && (
+            <Card.Title>
+              User: {capitalize(user.firstName)} {capitalize(user.lastName)}
+            </Card.Title>
+          )}
+          {!user && <Card.Title>User: Prior Employee</Card.Title>}
           <Card.Text>Date: {transaction.date.split('T')[0]} </Card.Text>
         </Card.Body>
       </Card>
