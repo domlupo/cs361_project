@@ -38,25 +38,10 @@ function TransactionStats() {
     });
   }, []);
 
-  const renderData = () => {
-    if (loading) return <ReactLoading color="#e26d5c" />;
-    const sales = transactions.filter((t) => t.endLoc === 'sold');
-    console.log(sales);
-    return (
-      <>
-        {transactions.map((transaction) => (
-          <TransactionListItem
-            transaction={transaction}
-            key={transaction.transactionID}
-          />
-        ))}
-      </>
-    );
-  };
-
   const renderPlot = () => {
     if (loading) return <ReactLoading color="#e26d5c" />;
     const sales = transactions.filter((t) => t.endLoc === 'sold');
+    console.log(sales);
     const salesInRange = sales.filter((s) => {
       return (
         new Date(s.date) > new Date(startDate) &&
