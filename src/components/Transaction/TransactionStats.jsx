@@ -60,7 +60,7 @@ function TransactionStats() {
           <LineChart width={600} height={400} data={incomeByDay}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis label="Date" dataKey="date" interval="preserveEnd" />
-            <YAxis label="Income ($)" interval="preserveEnd" />
+            <YAxis label="$" interval="preserveEnd" />
             <Line
               type="monotone"
               dataKey="income"
