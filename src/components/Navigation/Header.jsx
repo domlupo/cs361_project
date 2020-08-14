@@ -23,7 +23,11 @@ export default function Header({ children }) {
   };
 
   return (
-    <Navbar className="NavigationBar" variant="light" fixed="top">
+    <Navbar
+      className="NavigationBar justify-content-between"
+      variant="light"
+      fixed="top"
+    >
       <div className="NavigationSideContainer" />
       {children}
       <div className="NavigationUser">
