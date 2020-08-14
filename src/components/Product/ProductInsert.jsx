@@ -8,7 +8,7 @@ import {
   Row,
   Col,
 } from 'react-bootstrap';
-
+import ReactTooltip from 'react-tooltip';
 import API from '../../apis/API';
 import InputBox from '../shared/entryFormHelpers';
 import Header, { HeaderPadding } from '../Navigation/Header';
@@ -154,13 +154,22 @@ class ProductInsert extends Component {
                     />
                   </FormGroup>
 
-                  <Button onClick={this.handleSubmit}>Submit</Button>
+                  <Button
+                    data-tip
+                    data-for="submitTip"
+                    onClick={this.handleSubmit}
+                  >
+                    Submit
+                  </Button>
                   {successMessage && (
                     <p className="text-success">{successMessage}</p>
                   )}
                   {errorMessage && (
                     <p className="text-danger">{errorMessage}</p>
                   )}
+                  <ReactTooltip id="submitTip" place="top" effect="solid">
+                    Only an owner or manager can add a new product type
+                  </ReactTooltip>
                 </form>
               </div>
             </Col>
