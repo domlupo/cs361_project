@@ -30,8 +30,6 @@
     "moment": "^2.27.0",
     "morgan": "~1.9.1",
     "mysql": "^2.18.1",
-    "npm-check-updates": "^7.0.2",
-    "npm-install": "^1.4.1",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
