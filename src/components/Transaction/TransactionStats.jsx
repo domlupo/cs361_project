@@ -56,6 +56,7 @@ function TransactionStats() {
     if (incomeByDay.length > 0)
       return (
         <div>
+          <h3>Net Income vs. Date</h3>
           <LineChart width={600} height={400} data={incomeByDay}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis label="Date" dataKey="date" interval="preserveEnd" />
@@ -102,6 +103,7 @@ function TransactionStats() {
     if (loading) return <ReactLoading color="#e26d5c" />;
     return (
       <>
+        <h3>Transaction List</h3>
         {salesInRange.map((transaction) => (
           <TransactionListItem
             transaction={transaction}
@@ -116,8 +118,10 @@ function TransactionStats() {
     <div className="container">
       <Header />
       <HeaderPadding />
-      <div className="SalesPlot">{renderPlot()}</div>
       <div className="DateInputs">{dateInputs()}</div>
+      <div className="SalesPlot">{renderPlot()}</div>
+      <Header />
+      <HeaderPadding />
       <div className="FilteredData">{filteredList()}</div>
     </div>
   );
