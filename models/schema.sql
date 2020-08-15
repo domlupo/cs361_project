@@ -42,7 +42,7 @@ CREATE TABLE Products(
 DROP TABLE IF EXISTS Transactions;
 CREATE TABLE Transactions(
 	transactionID INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    userID INT NOT NULL,
+    userID INT,
     productID INT NOT NULL,
     date DATETIME NOT NULL,
     productQty INT NOT NULL,
@@ -50,7 +50,7 @@ CREATE TABLE Transactions(
     endLoc VARCHAR(10) NOT NULL,
     createdAt DATETIME NOT NULL,
     updatedAt DATETIME NOT NULL,
-    CONSTRAINT FOREIGN KEY (userID) REFERENCES Users(userID),
+    CONSTRAINT FOREIGN KEY (userID) REFERENCES Users(userID) on DELETE SET NULL,
     CONSTRAINT FOREIGN KEY (productID) REFERENCES Products(productID)
 );
 

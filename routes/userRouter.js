@@ -13,10 +13,10 @@ userRouter.put(
   [authService.jwt, authService.managementOnly],
   userService.editUserLevel,
 );
-userRouter.put(
-  '/:id/delete',
+userRouter.delete(
+  '/:id',
   [authService.jwt, authService.managementOnly],
-  userService.deleteUserFromDB,
+  userService.deleteUser,
 );
 userRouter.post('/login', authService.login, userService.login);
 userRouter.post('/create', authService.create, userService.create);
