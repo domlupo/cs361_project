@@ -56,9 +56,17 @@ const getIncomeByDay = (sales) => {
     }
   });
 
+  const dates = [];
+
+  Object.keys(holder).forEach((key) => {
+    dates.push(key);
+  });
+
+  dates.sort();
   const incomeByDay = [];
-  Object.keys(holder).forEach((key, index) => {
-    incomeByDay.push({ date: key, income: holder[key] });
+
+  dates.forEach((date) => {
+    incomeByDay.push({ date, income: holder[date] });
   });
 
   return incomeByDay;
