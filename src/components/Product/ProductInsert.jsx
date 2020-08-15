@@ -114,7 +114,7 @@ class ProductInsert extends Component {
                   />
 
                   <InputBox
-                    label="Product ID Code"
+                    label="Product Code"
                     name="code"
                     type="text"
                     value={code}
