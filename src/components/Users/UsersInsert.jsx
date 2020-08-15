@@ -152,6 +152,7 @@ class UsersInsert extends Component {
                   <FormGroup bssize="large">
                     <FormLabel>User Role</FormLabel>
                     <Form.Control
+                      name="userRole"
                       as="select"
                       value={userRole}
                       onChange={this.handleChange}

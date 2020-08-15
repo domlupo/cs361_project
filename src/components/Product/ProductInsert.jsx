@@ -1,5 +1,6 @@
 import React, { Component, useState } from 'react';
 import {
+  Form,
   FormLabel,
   FormGroup,
   FormControl,
@@ -37,20 +38,24 @@ class ProductInsert extends Component {
     const { value } = e.target;
     const { name } = e.target;
 
+    if (value < 0 && (name === 'price' || name === 'notificationCount')) {
+      this.setState({
+        [name]: 0,
+      });
+      return;
+    }
+
     this.setState({
       [name]: value,
     });
   }
 
   handleSubmit(e) {
-    const {
-      prodName,
-      code,
-      descript,
-      price,
-      expirable,
-      notificationCount,
-    } = this.state;
+    const { prodName, code, descript, price, notificationCount } = this.state;
+
+    let { expirable } = this.state;
+
+    expirable = expirable === 'Yes' ? 1 : 0;
 
     API.instance
       .post(`/product/create`, {
@@ -109,7 +114,7 @@ class ProductInsert extends Component {
                   />
 
                   <InputBox
-                    label="Product ID Code"
+                    label="Product Code"
                     name="code"
                     type="text"
                     value={code}
@@ -132,13 +137,21 @@ class ProductInsert extends Component {
                     handleChange={this.handleChange}
                   />
 
-                  <InputBox
-                    label="Does this product have an expiration date? Enter 1 for Yes, and enter 0 for No"
-                    name="expirable"
-                    type="text"
-                    value={expirable}
-                    handleChange={this.handleChange}
-                  />
+                  <FormGroup bssize="large">
+                    <FormLabel>
+                      Does this product have an expiration date?
+                    </FormLabel>
+                    <Form.Control
+                      name="expirable"
+                      as="select"
+                      value={expirable}
+                      onChange={this.handleChange}
+                    >
+                      <option />
+                      <option>Yes</option>
+                      <option>No</option>
+                    </Form.Control>
+                  </FormGroup>
 
                   <FormGroup bssize="large">
                     <FormLabel>
