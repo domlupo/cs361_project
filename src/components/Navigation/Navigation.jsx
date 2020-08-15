@@ -45,6 +45,15 @@ export default function Navigation({ children }) {
         >
           Transactions
         </NavLink>
+
+        <NavLink
+          className="NavigationLink"
+          to="/transaction-stats"
+          activeClassName="NavigationLinkActive"
+        >
+          Statistics
+        </NavLink>
+
         <NavLink
           className="NavigationLink"
           to="/user-list"

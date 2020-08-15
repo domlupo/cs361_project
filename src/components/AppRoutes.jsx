@@ -10,6 +10,7 @@ import UsersInsert from './Users/UsersInsert';
 import Navigation from './Navigation/Navigation';
 import WIP from './shared/WIP';
 import TransactionList from './Transaction/TransactionList';
+import TransactionStats from './Transaction/TransactionStats';
 
 export default function AppRoutes() {
   return (
@@ -18,6 +19,7 @@ export default function AppRoutes() {
         <Route path="/signin" component={SignIn} />
         <Route path="/signup" component={SignUp} />
         <Route path="/transactions" component={TransactionList} />
+        <Route path="/transaction-stats" component={TransactionStats} />
         <Route path="/product-insert" component={ProductInsert} />
         <Route path="/transactions" component={WIP} />
         <Route path="/user-insert" component={UsersInsert} />
