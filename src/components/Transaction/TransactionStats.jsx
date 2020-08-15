@@ -25,8 +25,9 @@ const dataUtil = require('./dataUtil');
 function TransactionStats() {
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [startDate, setStartDate] = useState(new Date(2020, 7, 1));
-  const [endDate, setEndDate] = useState(new Date(2020, 8, 1));
+  // HACK which hard codes initial date range from 2020 - 2025
+  const [startDate, setStartDate] = useState(new Date(2020, 0, 1));
+  const [endDate, setEndDate] = useState(new Date(2025, 0, 1));
 
   const handleStartChange = (event) => {
     setStartDate(event.target.value);
